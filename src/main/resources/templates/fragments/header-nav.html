@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+  <div th:fragment="header-nav">
+    <nav>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation" style="margin-top: 0.5em;">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                    
+                        <li><a th:href="@{/home}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                        <li><a th:href="@{/maintenance}"><i class="fa fa-desktop fa-fw"></i> Maintenance</a></li>
+                        <!-- /.nav-second-level -->
+                        <li>
+                                <a href="#"><i class="fa fa-truck"></i> Provider<span class="fa arrow"></span></a>
+                                
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a th:href="@{/provider/register}" href="">Register new provider</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/provider/list-provider}" >list of provider </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <li><a th:href="@{/items}"><i class="fa fa-file-text-o"></i> Items</a></li>
+                        <li th:each="itemType : ${currentCategoryList}"> 
+                        <a th:href="@{/items/category/view(category=${itemType.name})}" > <i class="fa fa-cube"></i> <span th:text="${itemType.name}"></spam></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</html>
