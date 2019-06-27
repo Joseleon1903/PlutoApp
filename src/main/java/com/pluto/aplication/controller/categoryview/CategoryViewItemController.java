@@ -53,7 +53,7 @@ public class CategoryViewItemController{
         model.addAttribute("filterformData",itemFilterFormData);
         model.addAttribute("itemsList",itemList);
         model.addAttribute("categoryName",category);
-        return "/category-view-item/categoryView";
+        return "category-view-item/categoryView";
     }
 
 
@@ -71,7 +71,7 @@ public class CategoryViewItemController{
         model.addAttribute("filterformData",itemFilterFormData);
         model.addAttribute("categoryName",category);
         System.out.println("list Size: "+ itemList.size());
-        return "/category-view-item/categoryView.html";
+        return "category-view-item/categoryView.html";
     }
 
     @RequestMapping(value="/items/category/buy")
@@ -84,7 +84,7 @@ public class CategoryViewItemController{
         System.out.println("category  : "+currentCategoryName);
         model.addAttribute("filterformData",itemFilterFormData);
         model.addAttribute("itemsList",itemList);
-        return "redirect:/items/category/view?category="+currentCategoryName;
+        return "redirect:items/category/view?category="+currentCategoryName;
     }
 
 }

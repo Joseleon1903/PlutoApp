@@ -42,7 +42,7 @@ public class HomePageController {
         itemList = ItemsMapping.getItemsList(listEntity);
         model.addAttribute("filterformData",itemFilterFormData);
         model.addAttribute("itemsList",itemList);
-        return "/dashboard/HomePage";
+        return "dashboard/HomePage";
     }
 
     @RequestMapping(value="/home/filter/items" , method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class HomePageController {
         model.addAttribute("itemsList",itemList);
         model.addAttribute("filterformData",itemFilterFormData);
         System.out.println("list Size: "+ itemList.size());
-        return "/dashboard/HomePage.html";
+        return "dashboard/HomePage.html";
     }
 
     @RequestMapping(value="/home/buy/item")
@@ -69,7 +69,7 @@ public class HomePageController {
         shoppingStoreServiceImpl.addProductToShoppingCar(itemLong, username);
         model.addAttribute("filterformData",itemFilterFormData);
         model.addAttribute("itemsList",itemList);
-        return "redirect:/home";
+        return "redirect:home";
     }
 
 }

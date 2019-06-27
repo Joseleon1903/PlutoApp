@@ -29,6 +29,7 @@ public class ListProviderController{
     model.addAttribute("searchBean",textSearchBean);
         return "provider/list/ListProviderRegistered";
     }
+    
     @RequestMapping(value ="/provider/list-provider/search", method = RequestMethod.POST)
     public String searchInListProviderPage(@ModelAttribute(value="textSearch") SearchTextDTO  textSearch , Model model, Principal principal){
         List<Provided> listProv  = providerServiceImpl.findProvidersByName(textSearch.getContent(), UtilityAplication.createPageableDefault()).getContent();

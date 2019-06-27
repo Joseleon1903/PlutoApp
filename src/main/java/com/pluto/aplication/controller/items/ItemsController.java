@@ -72,7 +72,7 @@ public class ItemsController{
         model.addAttribute("providerList",providedList);
         System.out.println("displayPage entry point. data: "+itemFormData );
         model.addAttribute("error", errrorDTO);
-        return "/items/ItemsPage";
+        return "items/ItemsPage";
     }
 
     @RequestMapping(value ="/registration/item", method = RequestMethod.POST)
@@ -88,7 +88,7 @@ public class ItemsController{
             model.addAttribute("categoryList",categoryName);
             model.addAttribute("providerList",providedList);
             model.addAttribute("error", errrorDTO);
-            return "/items/ItemsPage.html";
+            return "items/ItemsPage.html";
         }
 
         Items newItems = new Items();
@@ -114,7 +114,7 @@ public class ItemsController{
         model.addAttribute("itemTypeForm",itemFormData);
         model.addAttribute("providerList",providedList);
         model.clear();
-        return "redirect:/items";
+        return "redirect:items";
     }
 
     @RequestMapping(value = "/item/fileUpload", method = RequestMethod.POST) 
@@ -127,7 +127,7 @@ public class ItemsController{
             model.addAttribute("itemTypeForm",itemFormData);
             model.addAttribute("providerList",providedList);
             // Redirect to a successful upload page 
-            return "redirect:/items";
+            return "redirect:items";
         }
 
         try {
@@ -163,7 +163,7 @@ public class ItemsController{
         model.addAttribute("providerList",providedList);
         System.out.println("displayPage entry point. data: "+itemFormData );
         model.addAttribute("error", errrorDTO);
-        return "/items/ItemsPage";
+        return "items/ItemsPage";
     }
     
 }

@@ -65,7 +65,7 @@ public class MaintenanceController{
         model.addAttribute("pagination",pagination);
 
         model.addAttribute("error", errrorDTO);
-        return "/maintenance/Maintenance";
+        return "maintenance/Maintenance";
     }
 
     @RequestMapping(value ="/registration/itemType", method = RequestMethod.POST)
@@ -98,7 +98,7 @@ public class MaintenanceController{
         model.addAttribute("itemTypeForm",itemTypeForm);
         model.addAttribute("pagination",pagination);
         model.clear();
-        return "redirect:/maintenance";
+        return "redirect:maintenance";
     }
 
     @RequestMapping(value={"/maintenance/type/disable"})
@@ -108,7 +108,7 @@ public class MaintenanceController{
         ItemType entity = itemTypeService.findById(Long.parseLong(typeId));
         entity.setState(false);
         itemTypeService.save(entity);
-        return "redirect:/maintenance";
+        return "redirect:maintenance";
     } 
 
 }

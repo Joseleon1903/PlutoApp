@@ -32,7 +32,7 @@ public class ItemDetailController{
         Items item = itemsServiceImpl.findbyId(id);
         itemDetail = ItemsMapping.getItemsFromEntity(item);
         model.addAttribute("itemDetail", itemDetail);
-        return "/items/ItemDetailPage";
+        return "items/ItemDetailPage";
     }
 
     @RequestMapping(value="/items/detail/buy")
@@ -42,7 +42,7 @@ public class ItemDetailController{
         String username = pincipal.getName();
         long itemLong = Long.parseLong(itemId);
         shoppingStoreServiceImpl.addProductToShoppingCar(itemLong, username);
-        return "redirect:/items/detail/view?itemId="+itemId;
+        return "redirect:items/detail/view?itemId="+itemId;
     }
 
 }

@@ -65,7 +65,7 @@ public class RegistrationController {
             String error = errorExceptionService.findByCode(ConstantAplication.DUPLICATE_USERNAME_ERROR_CODE).getDescription();
             genericErrorDTO.setErrorDetail(error);
             model.addAttribute("errorBean",genericErrorDTO);
-            return "redirect:/profile/register";
+            return "redirect:profile/register";
         }
 
         //enviando email registration 

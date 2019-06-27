@@ -17,7 +17,7 @@ public class ShopCheckoutController{
     @RequestMapping(value={"/checkout/product/view"})
     public String displayPage(Model  model){
         System.out.println("displayPage entry point.");
-        return "/checkout/ShopCheckoutPage";
+        return "checkout/ShopCheckoutPage";
     }
 
     @RequestMapping(value={"/checkout/product/cancel"})
@@ -25,7 +25,7 @@ public class ShopCheckoutController{
         System.out.println("cancelShoppingCar...");
         String username = principal.getName();
         shoppingStoreServiceImpl.removeAllProductToShoppingCar(username);
-        return "redirect:/checkout/product/view";
+        return "redirect:checkout/product/view";
     } 
 
     @RequestMapping(value={"/checkout/product/confirm"})
@@ -33,7 +33,7 @@ public class ShopCheckoutController{
         System.out.println("condfirmShoppingCar...");
         String username = principal.getName();
         shoppingStoreServiceImpl.removeAllProductToShoppingCar(username);
-        return "redirect:/checkout/product/view/confirmation";
+        return "redirect:checkout/product/view/confirmation";
     }
 
 }
