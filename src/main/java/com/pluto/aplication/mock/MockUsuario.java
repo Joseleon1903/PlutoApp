@@ -2,6 +2,7 @@ package com.pluto.aplication.mock;
 
 import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.ImagesDataRepository;
+import com.pluto.aplication.repository.PriorityRepository;
 import com.pluto.aplication.service.implementation.EmailTemplateService;
 import com.pluto.aplication.service.interfaces.ErrorExceptionInterface;
 import com.pluto.aplication.service.interfaces.UserInterfaces;
@@ -30,6 +31,9 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private ImagesDataRepository imagesDataRepository;
+
+    @Autowired
+    private PriorityRepository priorityRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
@@ -62,6 +66,8 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         CatalogEmailTemplateInit();
 
         ImageMockItemDataBase();
+
+        CatalogPriority();
 
     }
 
@@ -139,6 +145,27 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         entity.setFileViewUri("http://localhost:8085/api/file/view/image/"+fileName );
         entity =imagesDataRepository.save(entity);
         return entity;
+    }
+
+    public void CatalogPriority(){
+
+        Priority entity = new Priority();
+
+        entity .setValue("HIGH");
+
+        priorityRepository.save(entity);
+
+        Priority entity1 = new Priority();
+
+        entity1.setValue("MEDIUM");
+
+        priorityRepository.save(entity1);
+
+        Priority entity2 = new Priority();
+
+        entity2.setValue("LOW");
+
+        priorityRepository.save(entity2);
     }
 
 }

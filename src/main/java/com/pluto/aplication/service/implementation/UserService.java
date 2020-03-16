@@ -29,7 +29,7 @@ public class UserService implements UserInterfaces {
 
     @Override
     public User findById(Long id) {
-        return userRepository.getOne(id);
+        return userRepository.findById(id).get();
     }
 
     @Override
@@ -53,7 +53,6 @@ public class UserService implements UserInterfaces {
     @Override
     public User saveOnSystem(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
         return userRepository.save(user);
     }
 

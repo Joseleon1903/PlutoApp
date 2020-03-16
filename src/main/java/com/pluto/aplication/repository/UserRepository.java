@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
 @org.springframework.stereotype.Repository
-public interface UserRepository extends Repository<User, Long>, JpaRepository<User, Long> , CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
    @Query("select u from User u where u.username like ?1")
    User findByUsername(String username);

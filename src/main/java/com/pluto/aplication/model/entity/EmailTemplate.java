@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="Email_Template")
 public class EmailTemplate implements Serializable{
 
     private static final long serialVersionUID = 2936373077564813096L;

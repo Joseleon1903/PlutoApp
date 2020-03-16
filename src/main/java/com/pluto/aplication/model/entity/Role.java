@@ -1,45 +1,25 @@
 package com.pluto.aplication.model.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
+@Data
 public class Role implements Serializable{
 
     private static final long serialVersionUID = 172102688145541835L;
-    
-    private Long id;
-    private String name;
-    private Set<User> users;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+    private Set<User> users;
     
 }

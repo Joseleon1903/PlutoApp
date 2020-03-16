@@ -15,13 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DataJpaTest
 public class UserRepositoryTest{
 
-
     @Autowired
     private TestEntityManager entityManager;
  
     @Autowired
     private UserRepository userRepository;
-
 
     String username = "test";
 
@@ -42,7 +40,7 @@ public class UserRepositoryTest{
     public void updateUserTest() {
         User found = userRepository.findByUsername(username);
         found.setUsername("test2");
-        userRepository.saveAndFlush(found);
+        userRepository.save(found);
         Assert.notNull(userRepository.findByUsername("test2"), "Error user not found");
     }
 
