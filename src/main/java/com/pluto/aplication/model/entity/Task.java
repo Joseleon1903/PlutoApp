@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by jose eduardo on 3/16/2020.
  */
 @Data
-@Entity
+//@Entity
 public class Task {
 
     @Id

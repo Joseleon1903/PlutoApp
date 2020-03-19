@@ -37,7 +37,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
-        initUserData();
+       // initUserData();
     }
 
     public void initUserData(){
@@ -45,7 +45,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
         ImagesData data =ImageMockDataBase();
 
-        User user = new User();
+        SystemUser user = new SystemUser();
         user.setId(1);
         user.setUsername("ADMIN");
         user.setPassword("ADMIN123");
@@ -57,7 +57,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         profile.setMobilePhone("809-445-7563");
         user.setProfile(profile);
         user.getProfile().setImage(data);
-        User userC = userService.createUser(user);
+        SystemUser userC = userService.createUser(user);
         System.out.println("Usuario: "+ userC );
         System.out.println("Terminando inicializando data de usuario");
 

@@ -20,7 +20,7 @@ public class ErrorExceptionService implements ErrorExceptionInterface{
 
 	@Override
 	public List<ErrorException> findAll() {
-		return errorExceptionRepository.findAll();
+		return errorExceptionRepository.findAllActive();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ErrorExceptionService implements ErrorExceptionInterface{
 
 	@Override
 	public ErrorException save(ErrorException errorException) {
-		return errorExceptionRepository.saveAndFlush(errorException);
+		return errorExceptionRepository.save(errorException);
 	}
 
 }

@@ -6,7 +6,7 @@ import com.pluto.aplication.model.dto.GenericErrorDTO;
 import com.pluto.aplication.model.dto.RegistrationDTO;
 import com.pluto.aplication.model.entity.EmailTemplate;
 import com.pluto.aplication.model.entity.Profile;
-import com.pluto.aplication.model.entity.User;
+import com.pluto.aplication.model.entity.SystemUser;
 import com.pluto.aplication.service.implementation.ErrorExceptionService;
 import com.pluto.aplication.service.implementation.UserService;
 import com.pluto.aplication.service.interfaces.EmailServiceInterfaces;
@@ -48,7 +48,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/profile/registration", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute(value="registerData") RegistrationDTO registerData, Model model){
-        User newUser =  new User();
+        SystemUser newUser =  new SystemUser();
         Profile newProfile = new Profile();
 
         //validando passsword
@@ -60,7 +60,7 @@ public class RegistrationController {
         }
 
         //validando nombre usuario
-        User validationUser = userService.findByUsername(registerData.getUsername());
+        SystemUser validationUser = userService.findByUsername(registerData.getUsername());
         if(validationUser != null){
             String error = errorExceptionService.findByCode(ConstantAplication.DUPLICATE_USERNAME_ERROR_CODE).getDescription();
             genericErrorDTO.setErrorDetail(error);

@@ -1,7 +1,6 @@
 package com.pluto.aplication.service.implementation;
 
-import java.util.HashSet;
-import com.pluto.aplication.model.entity.User;
+import com.pluto.aplication.model.entity.SystemUser;
 import com.pluto.aplication.repository.RoleRepository;
 import com.pluto.aplication.repository.UserRepository;
 import com.pluto.aplication.service.interfaces.UserInterfaces;
@@ -23,22 +22,22 @@ public class UserService implements UserInterfaces {
 
 
     @Override
-    public Iterable<User> findAllUsers() {
+    public Iterable<SystemUser> findAllUsers() {
         return  userRepository.findAll();
     }
 
     @Override
-    public User findById(Long id) {
+    public SystemUser findById(Long id) {
         return userRepository.findById(id).get();
     }
 
     @Override
-    public User createUser(User user) {
+    public SystemUser createUser(SystemUser user) {
         return saveOnSystem(user);
     }
 
     @Override
-    public User updateUser(User user) {
+    public SystemUser updateUser(SystemUser user) {
        if (userRepository.existsById(user.getId())){
           return userRepository.save(user);
        }
@@ -46,12 +45,12 @@ public class UserService implements UserInterfaces {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public SystemUser findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User saveOnSystem(User user) {
+    public SystemUser saveOnSystem(SystemUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
