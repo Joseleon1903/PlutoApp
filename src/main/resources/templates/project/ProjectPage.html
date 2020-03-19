@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pluto Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/vendor/metisMenu/metisMenu.min.css}"  rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/dist/css/sb-admin-2.css}"  rel="stylesheet">
+    <link th:href="@{/dist/css/home-style.css}"  rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- 	menu de navegación 	header init -->
+    <div th:replace="fragments/header-menu :: header-menu">... </div>
+    <!-- 	menu de navegación 	header end -->
+
+    <!-- 	menu de navegación 	init -->
+    <div th:replace="fragments/header-nav :: header-nav">...</div>
+    <!-- 	menu de navegación 	end -->
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h1 class="page-header">Project</h1>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#Create" data-toggle="tab" aria-expanded="true">Create Project</a>
+                                </li>
+                                <li class=""><a href="#Edit" data-toggle="tab" aria-expanded="false">Edit Project</a>
+                                </li>
+                                <li class=""><a href="#View" data-toggle="tab" aria-expanded="false">View Project</a>
+                                </li>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="Create">
+
+                                    <div class="col-lg-6">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea class="form-control" rows="4"></textarea>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-default">Save</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="Edit">
+
+                                    <div class="row" style="margin: 1.3em;">
+
+                                        <div class="input-group custom-search-form">
+                                            <input type="text" class="form-control" placeholder="Project name">
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control">
+                                                <p class="help-block">Example block-level help text here.</p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea class="form-control" rows="4"></textarea>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="View">
+
+                                        <div class="panel panel-default" style="margin-top: 1.5em;">
+                                            <!-- /.panel-heading -->
+
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Porject Name</th>
+                                                    <th>Description</th>
+                                                    <th>Active</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Cannon Color</td>
+                                                    <td>Video Game for Mobile</td>
+                                                    <td>TRUE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Pluto</td>
+                                                    <td>Web Aplication</td>
+                                                    <td>TRUE</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- jQuery -->
+    <script th:src="@{/vendor/jquery/jquery.min.js}" ></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script th:src="@{/vendor/metisMenu/metisMenu.min.js}" ></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script th:src="@{/dist/js/sb-admin-2.js}" ></script>
+
+</div>
+
+</body>
+
+</html>
