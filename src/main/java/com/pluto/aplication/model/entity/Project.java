@@ -23,9 +23,11 @@ public class Project {
 
     private Date creationDate;
 
+    private boolean active;
+
     @OneToOne
     public ImagesData image;
 
-    Project(){}
+    public Project(){}
 
 }

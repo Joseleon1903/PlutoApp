@@ -3,9 +3,9 @@ package com.pluto.aplication.util;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class AplicationUtil {
+public class ApplicationUtil {
 
-    private AplicationUtil(){}
+    private ApplicationUtil(){}
 
     /**
      *  return true if Strinf is null or is empty
