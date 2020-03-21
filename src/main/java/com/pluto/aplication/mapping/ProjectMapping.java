@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class ProjectMapping {
 
+    private ProjectMapping(){}
 
     public static Project convertToFormDto(ProjectFormDTO projectFormDTO){
 

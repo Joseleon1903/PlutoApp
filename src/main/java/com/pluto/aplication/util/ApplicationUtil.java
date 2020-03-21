@@ -20,6 +20,13 @@ public class ApplicationUtil {
         return false;
     }
 
+    public static boolean isNullOrEmpty(Object date){
+        if(date != null){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 
      * @param beginDate

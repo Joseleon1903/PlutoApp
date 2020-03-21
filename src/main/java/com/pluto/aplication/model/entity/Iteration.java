@@ -23,9 +23,11 @@ public class Iteration {
 
     private Date creationDate;
 
-    private Date InitDate;
+    private Date initDate;
 
     private Date endDate;
+
+    private boolean active;
 
     @ManyToOne
     @JoinColumn(name="project_iteration")
