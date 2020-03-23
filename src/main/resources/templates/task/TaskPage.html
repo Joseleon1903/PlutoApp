@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pluto Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/vendor/metisMenu/metisMenu.min.css}"  rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/dist/css/sb-admin-2.css}"  rel="stylesheet">
+    <link th:href="@{/dist/css/home-style.css}"  rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- 	menu de navegación 	header init -->
+    <div th:replace="fragments/header-menu :: header-menu">... </div>
+    <!-- 	menu de navegación 	header end -->
+
+    <!-- 	menu de navegación 	init -->
+    <div th:replace="fragments/header-nav :: header-nav">...</div>
+    <!-- 	menu de navegación 	end -->
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Create Task </h1>
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Basic Form Task
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form" th:action="@{/task/search(searchData =${searchBean})}" th:object="${searchBean}" method="post">
+
+                                        <div class="col-lg-6">
+
+                                            <div class="input-group custom-search-form">
+
+                                                <input type="text" th:field="${searchBean.content}" th:value="${searchBean.content}" class="form-control" placeholder="Project name or Id">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                    </span>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                    <form role="form" th:action="@{/task/Add(taskData=${taskFormBean},projectId=${projectBean.id})}" th:object="${taskFormBean}" method="post">
+
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group">
+                                                <select class="form-control" th:field="${taskFormBean.iterationName}">
+                                                    <option th:each="iteration : ${iterationList}" th:value="${iteration.name}" th:text="${iteration.name}">Iteration</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Tittle</label>
+                                            <input class="form-control"  th:field="${taskFormBean.tittle}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Task Detail</label>
+                                            <input class="form-control" th:field="${taskFormBean.taskDetail}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Priority</label>
+                                            <select class="form-control" th:field="${taskFormBean.priority}">
+                                                <option th:value="'Low'" th:text="Low" >Low</option>
+                                                <option th:value="'Medium'" th:text="Medium">Medium</option>
+                                                <option th:value="'High'" th:text="High">High</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <select class="form-control" th:field="${taskFormBean.type}">
+                                                <option th:value="'Bug'" th:text="Bug">Bug</option>
+                                                <option th:value="'Task'" th:text="Task" selected >Task</option>
+                                                <option th:value="'Issue'" th:text="Male">Issue</option>
+                                                <option th:value="'Enhancement'" th:text="Enhancement">Enhancement</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Note</label>
+                                            <textarea class="form-control" th:field="${taskFormBean.note}" rows="3"></textarea>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-default">Submit Button</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+
+
+
+
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- jQuery -->
+    <script th:src="@{/vendor/jquery/jquery.min.js}" ></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script th:src="@{/vendor/metisMenu/metisMenu.min.js}" ></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script th:src="@{/dist/js/sb-admin-2.js}" ></script>
+
+</div>
+
+</body>
+
+</html>

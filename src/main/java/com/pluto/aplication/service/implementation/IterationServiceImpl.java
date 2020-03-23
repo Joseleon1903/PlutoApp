@@ -33,6 +33,11 @@ public class IterationServiceImpl implements IterationService {
     }
 
     @Override
+    public Iteration findByName(String name) {
+        return iterationRepository.findByName(name);
+    }
+
+    @Override
     public List<Iteration> findAll() {
         List<Iteration> list = new ArrayList<>();
         iterationRepository.findAll().forEach(index ->{

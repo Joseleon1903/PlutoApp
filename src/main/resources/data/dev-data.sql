@@ -27,3 +27,11 @@ insert into project(id, name, description, creation_date, active)values(5, 'Clie
 
 -- iteration
 insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(1, NOW(),NOW(),'Iteration Demo',NOW(), 'Iteration Demo' ,1, true );
+insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(2, NOW(),NOW(),'Iteration Alfa',NOW(), 'Iteration Alfa' ,1, true );
+insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(3, NOW(),NOW(),'Iteration Beta',NOW(), 'Iteration Beta' ,1, true );
+
+-- Task
+
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type) values (1, NOW(), false, 1, 'example', 1, NOW(), 1, 'Example 1', 'Example tittle 1', 'Task');
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type) values (2, NOW(), false, 1, 'example', 1, NOW(), 1, 'Example 2', 'Example tittle 2', 'Task');
+

@@ -93,9 +93,7 @@ public class ProjectPageController {
         model.addAttribute("projectUpdate", projectUpdateFormDTO);
 
         model.addAttribute("projectBean", projectFormDTO);
-
         model.addAttribute("searchBean", searchFormDTO);
-
         model.addAttribute("projectList",projectService.findAllProjects());
 
         return "project/ProjectPage";

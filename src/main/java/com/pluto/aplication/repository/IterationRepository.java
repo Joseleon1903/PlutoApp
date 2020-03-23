@@ -12,4 +12,6 @@ public interface IterationRepository extends CrudRepository<Iteration, Long> {
 
     List<Iteration> findByProjectIdOrderById(long projecId);
 
+    Iteration findByName(String name);
+
 }

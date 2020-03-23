@@ -4,7 +4,7 @@ import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.ImagesDataRepository;
 import com.pluto.aplication.repository.PriorityRepository;
 import com.pluto.aplication.service.implementation.EmailTemplateService;
-import com.pluto.aplication.service.interfaces.ErrorExceptionInterface;
+import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import com.pluto.aplication.service.interfaces.UserInterfaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -24,7 +24,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
     private UserInterfaces userService;
 
     @Autowired
-    private ErrorExceptionInterface errorExceptionService;
+    private ErrorExceptionService errorExceptionService;
 
     @Autowired
     private EmailTemplateService emailTemplateService;

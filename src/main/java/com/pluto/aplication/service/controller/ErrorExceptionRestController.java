@@ -1,7 +1,7 @@
 package com.pluto.aplication.service.controller;
 
 import com.pluto.aplication.model.entity.ErrorException;
-import com.pluto.aplication.service.interfaces.ErrorExceptionInterface;
+import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ErrorExceptionRestController {
 
     @Autowired
-    private ErrorExceptionInterface errorExceptionService;
+    private ErrorExceptionService errorExceptionService;
 
     @RequestMapping(value="/findAll", method = RequestMethod.GET,produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

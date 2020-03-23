@@ -33,5 +33,4 @@ public class Iteration {
     @JoinColumn(name="project_iteration")
     private Project project;
 
-
 }
