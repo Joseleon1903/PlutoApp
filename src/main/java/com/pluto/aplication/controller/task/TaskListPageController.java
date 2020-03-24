@@ -18,7 +18,7 @@ public class TaskListPageController {
 
     @RequestMapping("/task/list")
     public String taskPage(Model model){
-        System.out.println("entry point display home");
+        System.out.println("entry point display taskPage");
 
         model.addAttribute("taskList",taskService.findAll());
 
