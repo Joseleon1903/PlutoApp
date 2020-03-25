@@ -11,6 +11,10 @@ public interface TaskService {
 
     Task created(long projectId, long iterationId, Task task);
 
+    Task findById(Long id);
+
     List<Task> findAll();
+
+    Task update(Task task);
 
 }

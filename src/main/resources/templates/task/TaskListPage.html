@@ -102,11 +102,13 @@
                                     <td th:text="${task.iteration.name}" >A</td>
                                     <td th:text="${task.iteration.project.name}" >A</td>
                                     <td>
+                                        <form method="get" th:action="@{/task/{taskId}/detail(taskId=${task.Id})}">
                                         <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
+                                        <button class="btn btn-default" type="submit">
                                         <i class="fa fa-eye"></i>
                                         </button>
                                         </span>
+                                        </form>
                                     </td>
                                 </tr>
                                 </tbody>

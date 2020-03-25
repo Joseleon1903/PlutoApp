@@ -12,6 +12,12 @@ INSERT INTO priority VALUES(1, 'LOW');
 INSERT INTO priority VALUES(2, 'MEDIUM');
 INSERT INTO priority VALUES(3, 'HIGH');
 
+--CATALOGO INSERT STATEMENT
+INSERT INTO statement VALUES(1, 'In Progres');
+INSERT INTO statement VALUES(2, 'New');
+INSERT INTO statement VALUES(3, 'Active');
+INSERT INTO statement VALUES(4, 'Stop');
+INSERT INTO statement VALUES(5, 'Closed');
 
 --DEFAULT ADMIN PROFILE INSERT
 INSERT INTO profile VALUES(1, 'admin@admin.com', 'admin','admin', '809-555-5555', null);
@@ -32,6 +38,6 @@ insert into iteration(id, init_date, creation_date,description, end_date, name, 
 
 -- Task
 
-insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type) values (1, NOW(), false, 1, 'example', 1, NOW(), 1, 'Example 1', 'Example tittle 1', 'Task');
-insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type) values (2, NOW(), false, 1, 'example', 1, NOW(), 1, 'Example 2', 'Example tittle 2', 'Task');
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (1, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 1', 'Example tittle 1', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (2, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 2', 'Example tittle 2', 'Task', 2);
 

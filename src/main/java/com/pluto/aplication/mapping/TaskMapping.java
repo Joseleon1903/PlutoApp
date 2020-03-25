@@ -2,7 +2,9 @@ package com.pluto.aplication.mapping;
 
 import com.pluto.aplication.model.dto.form.ProjectFormDTO;
 import com.pluto.aplication.model.dto.form.TaskFormData;
+import com.pluto.aplication.model.dto.form.TaskViewFormData;
 import com.pluto.aplication.model.entity.Project;
+import com.pluto.aplication.model.entity.Statement;
 import com.pluto.aplication.model.entity.Task;
 
 import java.util.Date;
@@ -11,6 +13,8 @@ import java.util.Date;
  * Created by jose eduardo on 3/23/2020.
  */
 public class TaskMapping {
+
+    private TaskMapping(){}
 
     public static Task convertToFormDto(TaskFormData taskFormData){
 
@@ -22,9 +26,31 @@ public class TaskMapping {
         entity.setEndDate(taskFormData.getEndDate());
         entity.setNote(taskFormData.getNote());
         entity.setType(taskFormData.getType());
+        entity.setStatement(new Statement(2, "New"));
 
 
         return entity;
+    }
+
+    public static TaskViewFormData convertEntityToDto(Task entity){
+
+        TaskViewFormData dto = new TaskViewFormData();
+
+        dto.setId(entity.getId());
+        dto.setTaskName(entity.getTaskTittle());
+        dto.setTaskDescription(entity.getTaskDetail());
+        dto.setDone(entity.isDone());
+        dto.setPriority(entity.getPriority().getValue());
+        dto.setType(entity.getType());
+        dto.setStatus(entity.getStatus());
+        dto.setStatement(entity.getStatement().getValue());
+        dto.setStartDate(entity.getStartDate());
+        dto.setEndDate(entity.getEndDate());
+        if(entity.getNote() != null){
+            dto.setNote(entity.getNote());
+        }
+
+        return dto;
     }
 
 

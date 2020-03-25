@@ -1,6 +1,7 @@
 package com.pluto.aplication.controller.summary;
 
 import com.pluto.aplication.model.dto.SummaryData;
+import com.pluto.aplication.model.dto.SummaryDetailData;
 import com.pluto.aplication.model.dto.form.SummaryFormData;
 import com.pluto.aplication.service.interfaces.IterationService;
 import com.pluto.aplication.service.interfaces.ProjectService;
@@ -33,6 +34,9 @@ public class SummaryPageController {
     @Autowired
     private SummaryService summaryService;
 
+    @Autowired
+    private SummaryDetailData summaryDetailData;
+
 
     @RequestMapping(value = "/summary", method = RequestMethod.GET)
     public String summayDisplayPage(Model model){
@@ -44,6 +48,12 @@ public class SummaryPageController {
 
         model.addAttribute("summaryFormBean", summaryFormData);
         model.addAttribute("summaryListData", new ArrayList<>());
+
+        model.addAttribute("summaryDetailBean", summaryDetailData);
+
+        //pie grapich attribute
+        SummaryUtil.generateSummaryPieViewPercent(new ArrayList<>(), model);
+        //pie grapich attribute
 
         return "summary/SummaryPage";
     }
@@ -61,6 +71,16 @@ public class SummaryPageController {
         model.addAttribute("iterarionBeanList", SummaryUtil.getIterationList(iterationService.findAll()));
         model.addAttribute("summaryFormBean", summaryFormData);
         model.addAttribute("summaryListData", sumaryData);
+
+        summaryDetailData.setSummaryCode(SummaryUtil.generateSummaryCode(summaryFormData.getProjectName(), summaryFormData.getIterationName()));
+        summaryDetailData.setSummaryPercent(SummaryUtil.generateSummaryPercent(sumaryData));
+        summaryDetailData.setBuildNumber("0.0.1");
+
+        model.addAttribute("summaryDetailBean", summaryDetailData);
+
+        //pie grapich attribute
+        SummaryUtil.generateSummaryPieViewPercent(sumaryData, model);
+        //pie grapich attribute
 
         return "summary/SummaryPage";
     }

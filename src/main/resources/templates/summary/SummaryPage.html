@@ -105,19 +105,28 @@
                                     <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 218px;">
                                         Task tittle
                                     </th>
-                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 262px;">
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 320px;">
                                         Task Detail
                                     </th>
-                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 242px;">
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;">
                                         Type
                                     </th>
-                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 190px;">
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 60px;">
                                         Priority
                                     </th>
-                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 190px;">
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;">
                                         Status
                                     </th>
-                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 190px;">
+
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;">
+                                        Start Date
+                                    </th>
+
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;">
+                                        End Date
+                                    </th>
+
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;">
                                        Action
                                     </th>
                                 </tr>
@@ -126,14 +135,19 @@
                                 <tr class="gradeA odd" role="row" th:each="summary : ${summaryListData}">
                                     <td th:text="${summary.taskTittle}" >Gecko</td>
                                     <td th:text="${summary.taskDetail}" >Firefox 1.0</td>
-                                    <td th:text="${task.type}">Win 98+ / OSX.2+</td>
-                                    <td th:text="${task.priority}" class="center">1.7</td>
-                                    <td th:text="${task.status}" >A</td>
+                                    <td th:text="${summary.type}">Win 98+ / OSX.2+</td>
+                                    <td th:text="${summary.priority}" class="center">1.7</td>
+                                    <td th:text="${summary.status}" >A</td>
+                                    <td th:text="${#dates.format(summary.startDate,'dd/MMM/yyyy')}">2020-03-21</td>
+                                    <td th:text="${#dates.format(summary.endDate,'dd/MMM/yyyy')}">2020-03-21</td>
                                     <td>
-                                        <!--<span class="input-group-btn">-->
-                                        <!--<button class="btn btn-default" type="button"> Start-->
-                                        <!--</button>-->
-                                        <!--</span>-->
+                                        <form method="get" th:action="@{/task/{taskId}/detail(taskId=${summary.taskId})}">
+                                        <span class="input-group-btn">
+                                        <button class="btn btn-default" type="" >
+                                        <i class="fa fa-eye"></i>
+                                        </button>
+                                        </span>
+                                        </form>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -147,6 +161,93 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+
+            <!-- Summary detail ..<row>-->
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="well">
+
+                        <fieldset disabled="">
+
+                            <div class="form-group row">
+                                <label>Summary Idetntification code</label>
+                                <input type="text" th:field="${summaryDetailBean.summaryCode}" class="form-control">
+                            </div>
+
+                            <div class="form-group row">
+                                <label>Finalization Percent </label>
+                                <input type="text" th:field="${summaryDetailBean.summaryPercent}" class="form-control">
+                            </div>
+
+                            <div class="form-group row">
+                                <label>Build generation number </label>
+                                <input type="text" th:field="${summaryDetailBean.buildNumber}" class="form-control">
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+            <!--..<row>-->
+
+
+            <!-- graphics ...<row>-->
+            <div class="row">
+                <div class="col-lg-12">
+
+                <!--grafic rapresentation -->
+
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+                <div id="container" style="height: 400px"></div>
+                    <script th:inline="javascript">
+                        Highcharts.chart('container', {
+                            chart : {
+                                type : 'pie',
+                                options3d : {
+                                    enabled : true,
+                                    alpha : 50,
+                                    beta : 0
+                                }
+                            },
+                            title : {
+                                text : 'Type task average'
+                            },
+                            tooltip : {
+                                pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions : {
+                                pie : {
+                                    allowPointSelect : true,
+                                    cursor : 'pointer',
+                                    depth : 35,
+                                    dataLabels : {
+                                        enabled : true,
+                                        format : '{point.name}'
+                                    }
+                                }
+                            },
+                            series : [ {
+                                type : 'pie',
+                                name : 'Ratio',
+                                data : [
+                                    [ 'Task', [[${taskPercent}]] ],
+                                    [ 'Bug', [[${bugPercent}]] ],
+                                    [ 'Issue', [[${issuePercent}]] ],
+                                    [ 'Enhancement', [[${enhancementPercent}]] ]
+                                ]
+                            } ]
+                        });
+                    </script>
+                <!-- /grafic rapresentation -->
+             </div>
+
+            </div>
+            <!--..</row>-->
 
 
 

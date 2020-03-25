@@ -3,6 +3,8 @@ package com.pluto.aplication.model.dto;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * Created by jose eduardo on 3/24/2020.
  */
@@ -22,7 +24,11 @@ public class SummaryData {
 
     private String type;
 
-    private int Status;
+    private int status;
+
+    private Date startDate;
+
+    private Date endDate;
 
     private boolean isDone;
 

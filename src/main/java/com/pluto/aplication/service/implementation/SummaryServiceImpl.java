@@ -51,6 +51,8 @@ public class SummaryServiceImpl implements SummaryService {
                 summaryData.setType(task.getType());
                 summaryData.setIterationId(iteration.getId());
                 summaryData.setTaskId(task.getId());
+                summaryData.setStartDate(task.getStartDate());
+                summaryData.setEndDate(task.getEndDate());
                 dataout.add(summaryData);
             });
         });
