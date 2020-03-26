@@ -1,8 +1,7 @@
 package com.pluto.aplication.service.implementation;
 
-import com.pluto.aplication.model.entity.Iteration;
-import com.pluto.aplication.model.entity.Project;
-import com.pluto.aplication.model.entity.Task;
+import com.pluto.aplication.model.entity.*;
+import com.pluto.aplication.repository.CommentRepository;
 import com.pluto.aplication.repository.IterationRepository;
 import com.pluto.aplication.repository.ProjectRepository;
 import com.pluto.aplication.repository.TaskRepository;
@@ -28,17 +27,16 @@ public class TaskServiceImpl implements TaskService{
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
+
     @Override
     public Task created(long projectId, long iterationId, Task task) {
 
         Project projectEntity = projectRepository.findById(projectId).get();
-
         Iteration iterationEntity = iterationRepository.findById(iterationId).get();
-
         iterationEntity.setProject(projectEntity);
-
         task.setIteration(iterationEntity);
-
         return taskRepository.save(task);
     }
 
@@ -59,5 +57,29 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public Task update(Task task) {
         return taskRepository.save(task);
+    }
+
+    @Override
+    public Task addAttachment(long taskId, Attachment attachment) {
+
+        Task entity = taskRepository.findById(taskId).get();
+
+        entity.getAttachments().add(attachment);
+
+        return taskRepository.save(entity);
+    }
+
+    @Override
+    public Task addComment(long taskId, Comment comment) {
+        Task entiTask = taskRepository.findById(taskId).get();
+        Comment commentEntity = commentRepository.save(comment);
+        entiTask.getCommnets().add(commentEntity);
+        return taskRepository.save(entiTask);
+
+    }
+
+    @Override
+    public List<Task> findByIterationId(long iterationId) {
+        return taskRepository.findByIterationId(iterationId);
     }
 }

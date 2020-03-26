@@ -32,9 +32,9 @@ insert into project(id, name, description, creation_date, active)values(4, 'Cann
 insert into project(id, name, description, creation_date, active)values(5, 'Client tax App','Web Aplication for project management', NOW(), true );
 
 -- iteration
-insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(1, NOW(),NOW(),'Iteration Demo',NOW(), 'Iteration Demo' ,1, true );
-insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(2, NOW(),NOW(),'Iteration Alfa',NOW(), 'Iteration Alfa' ,1, true );
-insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(3, NOW(),NOW(),'Iteration Beta',NOW(), 'Iteration Beta' ,1, true );
+insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(1, NOW(),NOW(),'iteration Demo',NOW(), 'iteration Demo' ,1, true );
+insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(2, NOW(),NOW(),'iteration Alfa',NOW(), 'iteration Alfa' ,1, true );
+insert into iteration(id, init_date, creation_date,description, end_date, name, project_iteration, active)values(3, NOW(),NOW(),'iteration Beta',NOW(), 'iteration Beta' ,1, true );
 
 -- Task
 

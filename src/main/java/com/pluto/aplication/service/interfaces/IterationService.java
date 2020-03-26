@@ -11,6 +11,8 @@ public interface IterationService {
 
     Iteration save(Long projectId , Iteration iteration);
 
+    Iteration findById(Long iterationId);
+
     Iteration findByName (String name);
 
     List<Iteration> findAll();

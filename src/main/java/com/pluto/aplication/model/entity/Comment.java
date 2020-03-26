@@ -25,6 +25,8 @@ public class Comment {
 
     private String userName;
 
+    private String profileImageUserUri;
+
     private Date sendDate;
 
 

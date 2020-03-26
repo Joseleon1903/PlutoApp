@@ -24,12 +24,14 @@ public class IterationServiceImpl implements IterationService {
 
     @Override
     public Iteration save(Long projectId, Iteration iteration) {
-
         Project project = projectRepository.findById(projectId).get();
-
         iteration.setProject(project);
-
         return iterationRepository.save(iteration);
+    }
+
+    @Override
+    public Iteration findById(Long iterationId) {
+        return iterationRepository.findById(iterationId).get();
     }
 
     @Override

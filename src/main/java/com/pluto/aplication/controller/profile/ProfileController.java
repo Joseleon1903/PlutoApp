@@ -9,7 +9,7 @@ import com.pluto.aplication.model.dto.form.ProfileFormData;
 import com.pluto.aplication.model.entity.EmailTemplate;
 import com.pluto.aplication.model.entity.ImagesData;
 import com.pluto.aplication.model.entity.SystemUser;
-import com.pluto.aplication.service.implementation.ImageServiceImpl;
+import com.pluto.aplication.service.implementation.FileServiceImpl;
 import com.pluto.aplication.service.implementation.UserService;
 import com.pluto.aplication.service.interfaces.EmailServiceInterfaces;
 import com.pluto.aplication.service.interfaces.EmailTemplateInterfaces;
@@ -35,7 +35,7 @@ public class ProfileController {
     private EmailTemplateInterfaces emailTemplateService;
 
     @Autowired
-    private ImageServiceImpl imageServiceImpl;
+    private FileServiceImpl imageServiceImpl;
 
     @Autowired
     private ProfileFormData profileFormData;

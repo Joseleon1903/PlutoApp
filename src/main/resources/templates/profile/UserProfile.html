@@ -102,7 +102,7 @@
                         <img th:src="${profileBean.profileImageUrl}" class="avatar img-circle" alt="avatar" style="width: 255px; height: 255px;">
                         <h6>Upload a different photo...</h6>
 
-                        <form action="#" th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
+                        <form th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>File input</label>
                                 <input type="file" name="myFile" />

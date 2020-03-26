@@ -116,8 +116,8 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>name</th>
-                                        <th>Begin Date</th>
-                                        <th>End Date</th>
+                                        <th>Begin date</th>
+                                        <th>End date</th>
                                         <th>View</th>
                                     </tr>
                                     </thead>
@@ -127,7 +127,15 @@
                                         <td th:text="${iteration.name}">Demo iteration</td>
                                         <td th:text="${#dates.format(iteration.initDate,'dd/MMM/yyyy')}">2020-03-21</td>
                                         <td th:text="${#dates.format(iteration.endDate,'dd/MMM/yyyy')}">2020-03-21</td>
-                                        <td><button type="button" class="btn btn-default">View</button></td>
+                                        <td>
+                                            <form th:action="@{/iteration/{iterationId}/detail(iterationId=${iteration.id})}" method="get">
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-eye"></i>
+                                            </button>
+                                            </span>
+                                            </form>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

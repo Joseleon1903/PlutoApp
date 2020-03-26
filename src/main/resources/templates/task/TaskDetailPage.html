@@ -163,10 +163,10 @@
                         <fieldset>
                             <div class="form-group">
                                 <h2>Add Attachment</h2>
-                                <form action="#" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/task/{taskid}/attachment/file/upload(taskid=${taskViewFormBean.id})}" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>File input</label>
-                                        <input type="file" name="myFile" />
+                                        <input type="file" name="file" />
                                     </div>
 
                                     <div class="form-group">
@@ -190,13 +190,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>foto</td>
-                                        <td>inmegen para ejemplo</td>
-                                        <td>PDF</td>
-                                        <td>Admin</td>
-                                        <td>25/mar/2020	</td>
-                                        <td>http://localhost:8080/file/download?</td>
+                                    <tr  th:each="attachment : ${attachmentBeanList}">
+                                        <td th:text="${attachment.fileName}">foto</td>
+                                        <td th:text="${attachment.fileDetail}">inmegen para ejemplo</td>
+                                        <td th:text="${attachment.documentType}">PDF</td>
+                                        <td th:text="${attachment.userName}">Admin</td>
+                                        <td th:text="${#dates.format(attachment.uploadDate,'dd/MMM/yyyy')}">25/mar/2020	</td>
+                                        <td><a th:href="@{${attachment.downloadUri}}">Download File </a></td>
                                     </tr>
 
                                     </tbody>
@@ -227,20 +227,18 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <ul class="chat">
-                                <li class="left clearfix">
+                                <li class="left clearfix" th:each="comment : ${commentBeanList}">
                                     <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
+                                        <img th:src="@{${comment.profileUrl}}" alt="User Avatar" class="img-circle" style="height: 80px; width: 80px;">
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
+                                            <strong class="primary-font"><p th:text="${comment.userName}"></p></strong>
                                             <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                                <i class="fa fa-clock-o fa-fw"></i><p th:text="${comment.sendDate}"></p>
                                             </small>
                                         </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
+                                        <p th:text="${comment.message}"></p>
                                     </div>
                                 </li>
 
@@ -248,14 +246,16 @@
                         </div>
                         <!-- /.panel-body -->
                         <div class="panel-footer">
+                            <form role="form" th:action="@{/task/add/comment(commentData =${commentFormBean},taskId=${taskViewFormBean.id})}" th:object="${commentFormBean}" method="post">
                             <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your comment here..." style="height: 50px; margin-right: 10px;">
+                                <input id="btn-input" type="text" th:field="${commentFormBean.message}" class="form-control input-sm" placeholder="Type your comment here..." style="height: 50px; margin-right: 10px;">
                                 <span class="input-group-btn" style="padding: 5px;">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                    <button class="btn btn-warning btn-sm" type="submit" id="btn-chat">
                                         Send
                                     </button>
                                 </span>
                             </div>
+                            </form>
                         </div>
                         <!-- /.panel-footer -->
                     </div>

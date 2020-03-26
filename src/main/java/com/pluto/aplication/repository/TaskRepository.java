@@ -12,4 +12,5 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     List<Task> findByIterationName(String name);
 
+    List<Task> findByIterationId(Long id);
 }

@@ -1,5 +1,7 @@
 package com.pluto.aplication.service.interfaces;
 
+import com.pluto.aplication.model.entity.Attachment;
+import com.pluto.aplication.model.entity.Comment;
 import com.pluto.aplication.model.entity.Task;
 
 import java.util.List;
@@ -16,5 +18,11 @@ public interface TaskService {
     List<Task> findAll();
 
     Task update(Task task);
+
+    Task addAttachment(long taskId, Attachment attachment);
+
+    Task addComment(long taskId, Comment comment);
+
+    List<Task> findByIterationId(long iterationId);
 
 }
