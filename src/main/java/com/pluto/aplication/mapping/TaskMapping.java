@@ -3,9 +3,7 @@ package com.pluto.aplication.mapping;
 import com.pluto.aplication.model.dto.form.ProjectFormDTO;
 import com.pluto.aplication.model.dto.form.TaskFormData;
 import com.pluto.aplication.model.dto.form.TaskViewFormData;
-import com.pluto.aplication.model.entity.Project;
-import com.pluto.aplication.model.entity.Statement;
-import com.pluto.aplication.model.entity.Task;
+import com.pluto.aplication.model.entity.*;
 
 import java.util.Date;
 
@@ -26,9 +24,11 @@ public class TaskMapping {
         entity.setEndDate(taskFormData.getEndDate());
         entity.setNote(taskFormData.getNote());
         entity.setType(taskFormData.getType());
+        entity.setPriority(new Priority(taskFormData.getPriority()));
+        entity.setIteration(new Iteration(taskFormData.getIterationName()));
+        entity.setStatus(0);
+        entity.setDone(false);
         entity.setStatement(new Statement(2, "New"));
-
-
         return entity;
     }
 

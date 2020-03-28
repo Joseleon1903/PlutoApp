@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface PriorityRepository extends CrudRepository<Priority, Long> {
 
+    Priority findByValue(String value);
+
 }

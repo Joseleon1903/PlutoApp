@@ -63,6 +63,8 @@ public class SummaryPageController {
         System.out.println("entry point display searchProject");
         System.out.println("Search Param : "+summaryFormData);
 
+
+
         List<SummaryData> sumaryData = summaryService.searchResumenByParam(summaryFormData.getProjectName(), summaryFormData.getIterationName());
 
         System.out.println("Summary list count: "+ sumaryData.size());

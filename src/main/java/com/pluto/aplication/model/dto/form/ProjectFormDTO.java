@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectFormDTO {
 
-    public Long id;
+    public long id;
     public String name;
     public String description;
 

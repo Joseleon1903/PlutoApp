@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface TaskService {
 
-    Task created(long projectId, long iterationId, Task task);
+    Task created(long projectId, Task task);
 
     Task findById(Long id);
 

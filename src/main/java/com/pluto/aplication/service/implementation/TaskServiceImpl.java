@@ -1,10 +1,7 @@
 package com.pluto.aplication.service.implementation;
 
 import com.pluto.aplication.model.entity.*;
-import com.pluto.aplication.repository.CommentRepository;
-import com.pluto.aplication.repository.IterationRepository;
-import com.pluto.aplication.repository.ProjectRepository;
-import com.pluto.aplication.repository.TaskRepository;
+import com.pluto.aplication.repository.*;
 import com.pluto.aplication.service.interfaces.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,12 +27,16 @@ public class TaskServiceImpl implements TaskService{
     @Autowired
     private CommentRepository commentRepository;
 
-    @Override
-    public Task created(long projectId, long iterationId, Task task) {
+    @Autowired
+    private PriorityRepository priorityRepository;
 
+    @Override
+    public Task created(long projectId, Task task) {
+        Priority priority = priorityRepository.findByValue(task.getPriority().getValue().toUpperCase());
         Project projectEntity = projectRepository.findById(projectId).get();
-        Iteration iterationEntity = iterationRepository.findById(iterationId).get();
+        Iteration iterationEntity = iterationRepository.findByName(task.getIteration().getName());
         iterationEntity.setProject(projectEntity);
+        task.setPriority(priority);
         task.setIteration(iterationEntity);
         return taskRepository.save(task);
     }

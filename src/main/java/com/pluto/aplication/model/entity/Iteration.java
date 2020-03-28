@@ -33,4 +33,9 @@ public class Iteration {
     @JoinColumn(name="project_iteration")
     private Project project;
 
+    public Iteration(String name) {
+        this.name = name;
+    }
+
+    public Iteration() {}
 }

@@ -1,5 +1,10 @@
 package com.pluto.aplication.util;
 
+import com.pluto.aplication.model.dto.ErrorData;
+import com.pluto.aplication.model.entity.ErrorException;
+import com.pluto.aplication.service.interfaces.ErrorExceptionService;
+import org.springframework.ui.Model;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -40,6 +45,19 @@ public class ApplicationUtil {
             return "";
         }
         return minutes+" minutes ago";
+    }
+
+    public static void validateErrorPage(String error, Model model, ErrorExceptionService errorExceptionService){
+        if(ApplicationUtil.isStringNullOrEmpty(error)){
+            ErrorException errorEntity = errorExceptionService.findByCode(Long.parseLong(error));
+            ErrorData data = new ErrorData();
+            data.setId(errorEntity.getId());
+            data.setCode(errorEntity.getCode()+"");
+            data.setTittle("Application server error");
+            data.setDescription(errorEntity.getDescription());
+            model.addAttribute("errorBean",data);
+
+        }
     }
 
 

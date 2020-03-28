@@ -1,5 +1,6 @@
 package com.pluto.aplication.controller.task;
 
+import com.pluto.aplication.constant.ConstantAplication;
 import com.pluto.aplication.mapping.AttachmentMapping;
 import com.pluto.aplication.mapping.CommentMapping;
 import com.pluto.aplication.mapping.TaskMapping;
@@ -10,9 +11,11 @@ import com.pluto.aplication.model.entity.Comment;
 import com.pluto.aplication.model.entity.SystemUser;
 import com.pluto.aplication.model.entity.Task;
 import com.pluto.aplication.service.implementation.UserService;
+import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import com.pluto.aplication.service.interfaces.FileService;
 import com.pluto.aplication.service.interfaces.StatementService;
 import com.pluto.aplication.service.interfaces.TaskService;
+import com.pluto.aplication.util.ApplicationUtil;
 import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,8 @@ import java.util.Date;
 @Controller
 public class TaskDetailController {
 
+    @Autowired
+    private ErrorExceptionService exceptionService;
 
     @Autowired
     private TaskService taskService;
@@ -50,20 +55,20 @@ public class TaskDetailController {
     private UserService userService;
 
     @RequestMapping("/task/{taskId}/detail")
-    public String taskPage(Model model , @PathVariable("taskId") Long taskId){
+    public String taskPage(Model model , @PathVariable("taskId") Long taskId, @RequestParam(name ="error", required = false) String error){
         System.out.println("entry point display taskPageDetail");
         System.out.println("Param : "+taskId);
 
         Task entity = taskService.findById(taskId);
 
         taskViewFormData = TaskMapping.convertEntityToDto(entity);
+
         model.addAttribute("taskViewFormBean",taskViewFormData );
-
         model.addAttribute("attachmentBeanList", AttachmentMapping.convertToFormDtoList(entity.getAttachments()));
-
         model.addAttribute("commentBeanList", CommentMapping.convertToFormDtoList(entity.getCommnets()));
-
         model.addAttribute("commentFormBean", commentFormData);
+        ApplicationUtil.validateErrorPage(error, model, exceptionService);
+
         return "task/TaskDetailPage";
     }
 
@@ -73,6 +78,11 @@ public class TaskDetailController {
         System.out.println("param : "+taskViewFormData);
 
         Task entity = taskService.findById(taskViewFormData.getId());
+
+        if(!ApplicationUtil.isStringNullOrEmpty(taskViewFormData.getType()) ||
+                !ApplicationUtil.isStringNullOrEmpty(taskViewFormData.getStatement())){
+            return "redirect:/task/"+taskViewFormData.getId()+"/detail?error="+ ConstantAplication.INVALID_INPUT_FORM;
+        }
 
         entity.setType(taskViewFormData.getType());
         entity.setStatus(taskViewFormData.getStatus());
@@ -89,6 +99,10 @@ public class TaskDetailController {
     public String addTaskAttachment(@RequestParam("file") MultipartFile myFile,@PathVariable("taskid") Long taskid,
                                     Principal principal, Model model) {
         System.out.println("entering addTaskAttachment");
+
+        if(!ApplicationUtil.isStringNullOrEmpty(myFile.getOriginalFilename())){
+            return "redirect:/task/"+taskid+"/detail?error="+ ConstantAplication.INVALID_INPUT_FORM;
+        }
         System.out.println("file name : "+ myFile.getOriginalFilename());
         Attachment attachment = null;
         String userName = principal.getName();
@@ -97,6 +111,7 @@ public class TaskDetailController {
             attachment =  fileService.saveAttachment(myFile, userName);
         }catch(IOException ex){
             System.out.println("error save file");
+            return "redirect:/task/"+taskid+"/detail?error="+ ConstantAplication.INTERNAL_SERVER_ERROR;
         }
         System.out.println("entering add task Attachment");
         taskService.addAttachment(taskid, attachment);
@@ -109,6 +124,10 @@ public class TaskDetailController {
     public String addCommentTask(@ModelAttribute(value="commentData") CommentFormData commentFormData,Principal principal, Model model){
         System.out.println("entering addCommentTask");
         System.out.println("param : "+ commentFormData);
+
+        if(!ApplicationUtil.isStringNullOrEmpty(commentFormData.getMessage())){
+            return "redirect:/task/"+commentFormData.getTaskId()+"/detail?error="+ ConstantAplication.INVALID_INPUT_FORM;
+        }
         String username = principal.getName();
         SystemUser user = userService.findByUsername(username);
         Comment entity =  new Comment();

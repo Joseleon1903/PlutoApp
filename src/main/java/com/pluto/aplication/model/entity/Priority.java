@@ -20,7 +20,9 @@ public class Priority {
 
     private String value;
 
-
     public Priority(){}
 
+    public Priority(String value) {
+        this.value = value;
+    }
 }
