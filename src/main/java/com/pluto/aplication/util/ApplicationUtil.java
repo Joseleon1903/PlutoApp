@@ -61,7 +61,13 @@ public class ApplicationUtil {
             data.setTittle("Application server error");
             data.setDescription(errorEntity.getDescription());
             model.addAttribute("errorBean",data);
-
+        }else{
+            ErrorData data = new ErrorData();
+            data.setId(0L);
+            data.setCode("");
+            data.setTittle("Application server error");
+            data.setDescription("");
+            model.addAttribute("errorBean",data);
         }
     }
 
