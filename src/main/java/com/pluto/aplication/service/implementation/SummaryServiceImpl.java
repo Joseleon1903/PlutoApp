@@ -9,6 +9,9 @@ import com.pluto.aplication.repository.ProjectRepository;
 import com.pluto.aplication.repository.TaskRepository;
 import com.pluto.aplication.service.interfaces.SummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,31 +33,31 @@ public class SummaryServiceImpl implements SummaryService {
     private TaskRepository taskRepository;
 
     @Override
-    public List<SummaryData> searchResumenByParam(String projectName, String iterationName) {
+    public List<SummaryData> searchResumenByParam(String projectName, String iterationName, int showPageindex,int showEntry) {
 
         List<SummaryData> dataout = new ArrayList<>();
 
         Project project = projectRepository.findByName(projectName);
 
-        List<Iteration> listiteration = iterationRepository.findByProjectIdOrderById(project.getId());
+        Pageable pageable= PageRequest.of(showPageindex, showEntry);
 
-        listiteration.forEach( iteration -> {
-            List<Task> taskList = taskRepository.findByIterationName(iteration.getName());
-            taskList.forEach(task ->{
-                SummaryData summaryData = new SummaryData();
-                summaryData.setTaskTittle(task.getTaskTittle());
-                summaryData.setTaskDetail(task.getTaskDetail());
-                summaryData.setDone(task.isDone());
-                summaryData.setNote(task.getNote());
-                summaryData.setPriority(task.getPriority().getValue());
-                summaryData.setStatus(task.getStatus());
-                summaryData.setType(task.getType());
-                summaryData.setIterationId(iteration.getId());
-                summaryData.setTaskId(task.getId());
-                summaryData.setStartDate(task.getStartDate());
-                summaryData.setEndDate(task.getEndDate());
-                dataout.add(summaryData);
-            });
+        Iteration iteration = iterationRepository.findByProjectIdAndNameOrderById(project.getId(), iterationName);
+
+        Page<Task> taskList = taskRepository.findByIterationName(iteration.getName(),pageable );
+        taskList.forEach(task ->{
+            SummaryData summaryData = new SummaryData();
+            summaryData.setTaskTittle(task.getTaskTittle());
+            summaryData.setTaskDetail(task.getTaskDetail());
+            summaryData.setDone(task.isDone());
+            summaryData.setNote(task.getNote());
+            summaryData.setPriority(task.getPriority().getValue());
+            summaryData.setStatus(task.getStatus());
+            summaryData.setType(task.getType());
+            summaryData.setIterationId(iteration.getId());
+            summaryData.setTaskId(task.getId());
+            summaryData.setStartDate(task.getStartDate());
+            summaryData.setEndDate(task.getEndDate());
+            dataout.add(summaryData);
         });
         return dataout;
     }

@@ -24,4 +24,8 @@ public interface ConstantAplication{
     //error message
     public static String FORM_BLANK_VALUE= "There is a required attribute not provided";
 
+    public static int DEFAULT_PAGINATION_ENTRY =10;
+    public static int DEFAULT_PAGINATION_INDEX =0;
+
+
 }

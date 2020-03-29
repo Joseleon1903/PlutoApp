@@ -13,5 +13,7 @@ public class SearchFormDTO {
 
     private String content;
 
+    private String showEntry;
+
     public SearchFormDTO(){}
 }

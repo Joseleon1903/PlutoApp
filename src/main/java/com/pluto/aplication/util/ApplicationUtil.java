@@ -1,11 +1,16 @@
 package com.pluto.aplication.util;
 
 import com.pluto.aplication.model.dto.ErrorData;
+import com.pluto.aplication.model.dto.ShowTableData;
 import com.pluto.aplication.model.entity.ErrorException;
+import com.pluto.aplication.model.entity.Task;
 import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationUtil {
@@ -58,6 +63,32 @@ public class ApplicationUtil {
             model.addAttribute("errorBean",data);
 
         }
+    }
+
+    public static ShowTableData getShowDataTable(int entry, int total){
+
+        ShowTableData show = new ShowTableData();
+
+        int showItem  = 0;
+        int pageTotal = (total/ entry) +1;
+        show.setShowEntry(entry);
+        show.setTotalElement(total);
+
+        if(entry == total){
+            showItem = entry;
+        }else{
+            showItem = total % entry;
+        }
+        show.setShowItem(showItem);
+
+        List<Integer> intList = new ArrayList<>();
+        for (int id = 0; id < pageTotal; id ++) {
+            int obj = Integer.MAX_VALUE;
+            intList.add(obj);
+        }
+        show.setPageTotal(intList);
+
+        return show;
     }
 
 

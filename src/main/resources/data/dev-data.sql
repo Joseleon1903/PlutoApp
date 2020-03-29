@@ -46,4 +46,17 @@ insert into iteration(id, init_date, creation_date,description, end_date, name, 
 
 insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (1, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 1', 'Example tittle 1', 'Task', 2);
 insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (2, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 2', 'Example tittle 2', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (3, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 3', 'Example tittle 3', 'Enhancement', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (4, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 4', 'Example tittle 4', 'Enhancement', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (5, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 5', 'Example tittle 5', 'Enhancement', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (6, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 6', 'Example tittle 6', 'Issue', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (7, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 7', 'Example tittle 7', 'Issue', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (8, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 8', 'Example tittle 8', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (9, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 9', 'Example tittle 9', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (10, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 10', 'Example tittle 10', 'Bug', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (11, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 11', 'Example tittle 11', 'Bug', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (12, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 22', 'Example tittle 12', 'Bug', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (13, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 13', 'Example tittle 13', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (14, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 14', 'Example tittle 14', 'Issue', 2);
+
 

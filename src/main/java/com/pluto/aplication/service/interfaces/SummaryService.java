@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface SummaryService {
 
-    List<SummaryData> searchResumenByParam(String projectName, String iterationName);
+    List<SummaryData> searchResumenByParam(String projectName, String iterationName,int showPageindex,int showEntry);
 
 
 }
