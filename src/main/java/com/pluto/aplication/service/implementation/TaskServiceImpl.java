@@ -1,9 +1,15 @@
 package com.pluto.aplication.service.implementation;
 
+import com.pluto.aplication.constant.UtilityAplication;
 import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.*;
 import com.pluto.aplication.service.interfaces.TaskService;
+import com.pluto.aplication.util.ApplicationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,6 +59,16 @@ public class TaskServiceImpl implements TaskService{
             list.add(item);
         });
         return list;
+    }
+
+    @Override
+    public Page<Task> findAllPaginated(int page, int entry, String searchText) {
+        Pageable pageable= PageRequest.of(page, entry);
+
+        if(!ApplicationUtil.isStringNullOrEmpty(searchText)){
+            return taskRepository.findAll(pageable);
+        }
+        return taskRepository.findByTaskTittle(searchText, pageable);
     }
 
     @Override

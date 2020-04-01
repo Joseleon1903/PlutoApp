@@ -13,10 +13,13 @@ public interface IterationService {
 
     Iteration findById(Long iterationId);
 
-    Iteration findByName (String name);
+    Iteration findByName(String name);
 
     List<Iteration> findAll();
 
     List<Iteration> findByProjectId(Long projectId);
+
+    List<Iteration> findByProjectName(String projectName);
+
 
 }

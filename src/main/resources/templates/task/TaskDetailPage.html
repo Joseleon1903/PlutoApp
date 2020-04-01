@@ -100,8 +100,9 @@
                 <!-- .col-lg-6 -->
                 <div class="col-lg-6">
 
-                        <fieldset>
-                            <div class="form-group">
+                        <fieldset id="editableForm">
+
+                            <div disabled class="form-group">
                                 <label>Type</label>
                                 <select class="form-control" th:field="${taskViewFormBean.type}" >
                                     <option th:value="'Bug'" th:text="Bug">Bug</option>
@@ -287,6 +288,14 @@
 
     <div th:replace="fragments/error-modal :: error-dialog">...</div>
 
+    <script th:inline="javascript" th:if="${taskViewFormBean.done}">
+        /*<![CDATA[*/
+
+        alert("editable form ");
+        $('#editableForm').prop( "disabled", true );
+
+        /*]]>*/
+    </script>
 
 </div>
 

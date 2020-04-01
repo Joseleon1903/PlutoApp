@@ -28,6 +28,8 @@ public class Task {
     @OneToOne
     private Statement statement;
 
+    private Date creationDate;
+
     private Date startDate;
 
     private Date endDate;

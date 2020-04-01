@@ -52,4 +52,9 @@ public class IterationServiceImpl implements IterationService {
     public List<Iteration> findByProjectId(Long projectId) {
         return iterationRepository.findByProjectIdOrderById(projectId);
     }
+
+    @Override
+    public List<Iteration> findByProjectName(String projectName) {
+        return iterationRepository.findByProjectNameOrderById(projectName);
+    }
 }

@@ -3,6 +3,7 @@ package com.pluto.aplication.service.interfaces;
 import com.pluto.aplication.model.entity.Attachment;
 import com.pluto.aplication.model.entity.Comment;
 import com.pluto.aplication.model.entity.Task;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface TaskService {
     Task findById(Long id);
 
     List<Task> findAll();
+
+    Page<Task> findAllPaginated(int page, int entry, String searchText);
 
     Task update(Task task);
 
