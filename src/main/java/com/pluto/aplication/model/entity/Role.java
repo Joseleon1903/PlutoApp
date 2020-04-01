@@ -1,10 +1,9 @@
 package com.pluto.aplication.model.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
-
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -20,6 +19,7 @@ public class Role implements Serializable{
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<SystemUser> users;
+    private Collection<SystemUser> users;
+
     
 }
