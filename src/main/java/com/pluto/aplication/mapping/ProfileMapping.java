@@ -1,13 +1,13 @@
 package com.pluto.aplication.mapping;
 
 import com.pluto.aplication.model.dto.form.ProfileFormData;
-import com.pluto.aplication.model.entity.User;
+import com.pluto.aplication.model.entity.SystemUser;
 
 public class ProfileMapping{
 
     private ProfileMapping(){}
 
-    public static ProfileFormData convertFromEntity(User user){
+    public static ProfileFormData convertFromEntity(SystemUser user){
         ProfileFormData entityout = new ProfileFormData();
         entityout.setUsername(user.getUsername());
         entityout.setFirstName(user.getProfile().getFirstName());

@@ -1,7 +1,7 @@
 package com.pluto.aplication.service.implementation;
 
 import com.pluto.aplication.model.entity.Role;
-import com.pluto.aplication.model.entity.User;
+import com.pluto.aplication.model.entity.SystemUser;
 import com.pluto.aplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +24,7 @@ public class SecurityUserDetailsService implements UserDetailsService{
     @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username);
+        SystemUser user = userRepository.findByUsername(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<!-- 	Error Modal  	 -->
+<div class="row" id="row-modal" th:fragment="error-dialog" style="display: none;">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Modals
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <strong><h4 class="modal-title text-center danger-tittle" id="myModalLabel">
+                                    <!--tittle panel-->
+                                </h4></strong>
+                            </div>
+                            <div class="modal-body" id="MyModalBody">
+                                <!--content panel -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" onclick="hiddenErrorModal()" >Continue</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- .panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+    <!-- Page-Level Modal Scripts - Notifications -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        var error = {
+
+            id : [[${errorBean.id}]],
+            code: [[${errorBean.code}]],
+            tittle: [[${errorBean.tittle}]],
+            description: [[${errorBean.description}]]
+
+        }
+
+        function showErrorModal(){
+
+            $('#myModal').modal('show');
+            $('#row-modal').show('contents');
+
+            $( "#myModalLabel" ).append(error.code+ ' - '+ error.tittle);
+            $( "#MyModalBody" ).append(error.description);
+        }
+
+        function hiddenErrorModal(){
+
+            $('#myModal').modal('hide');
+            $('#row-modal').hide('none')
+
+        }
+
+        if(error != null){
+            showErrorModal();
+        }
+
+
+        /*]]>*/
+    </script>
+</div>
+<!-- /.row -->
+<!-- 	Error Modal-->
+</body>
+</html>

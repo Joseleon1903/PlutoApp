@@ -12,7 +12,6 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Images_Tab")
 public class ImagesData implements Serializable{
 
     private static final long serialVersionUID = 8967144121761988622L;

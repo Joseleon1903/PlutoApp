@@ -1,7 +1,7 @@
 package com.pluto.aplication.service.controller;
 
 import java.io.IOException;
-import com.pluto.aplication.service.implementation.ImageServiceImpl;
+import com.pluto.aplication.service.implementation.FileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImagesRestController {
 
     @Autowired
-    private ImageServiceImpl imageServiceImpl;
+    private FileServiceImpl imageServiceImpl;
 
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file) {

@@ -5,10 +5,17 @@ public interface ConstantAplication{
 
     public String ANONYMOUS_USER="anonymousUser";
 
-    //erroro code 
+    //erroro code
+    public static long INTERNAL_SERVER_ERROR = 500;
     public static long INVALID_USER_ERROR_CODE = 501;
     public static long INVALID_MATCH_PASSWORD_ERROR_CODE = 502;
     public static long DUPLICATE_USERNAME_ERROR_CODE = 503;
+
+    public static long INVALID_INPUT_FORM= 504;
+    public static long DUPLICATE_PROJECT_NAME= 505;
+    public static long PROJECT_NOT_FOUND = 506;
+    public static long ITERATION_NOT_FOUND = 507;
+
 
     //email template code
     public static String REGISTRATION_EMAIL_CODE= "Email_new_registration";

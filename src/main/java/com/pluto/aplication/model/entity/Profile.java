@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="Profile_Tab")
 public class Profile implements Serializable{
 
     private static final long serialVersionUID = -8703912039452538788L;

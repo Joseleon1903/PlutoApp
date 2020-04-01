@@ -1,19 +1,19 @@
 package com.pluto.aplication.service.interfaces;
 
-import com.pluto.aplication.model.entity.User;
+import com.pluto.aplication.model.entity.SystemUser;
 
 public interface UserInterfaces {
 
-    Iterable<User> findAllUsers();
+    Iterable<SystemUser> findAllUsers();
 
-    User findById(Long id);
+    SystemUser findById(Long id);
 
-    User createUser(User user);
+    SystemUser createUser(SystemUser user);
 
-    User updateUser(User user);
+    SystemUser updateUser(SystemUser user);
 
-    User findByUsername(String username);
+    SystemUser findByUsername(String username);
 
-    User saveOnSystem(User user);
+    SystemUser saveOnSystem(SystemUser user);
 
 }

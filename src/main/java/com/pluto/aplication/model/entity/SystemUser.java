@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class User implements Serializable {
+public class SystemUser implements Serializable {
 
     private static final long serialVersionUID = -3571211166033652642L;
 
@@ -20,19 +20,18 @@ public class User implements Serializable {
     private Profile profile;
 
     @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
 
-    public User(long id) {
+    public SystemUser(long id) {
         this.id = id;
     }
 
-    public User(String username) {
+    public SystemUser(String username) {
         this.username = username;
     }
 
-    public User() {}
+    public SystemUser() {}
     
 
 }

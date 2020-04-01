@@ -2,8 +2,9 @@ package com.pluto.aplication.mock;
 
 import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.ImagesDataRepository;
+import com.pluto.aplication.repository.PriorityRepository;
 import com.pluto.aplication.service.implementation.EmailTemplateService;
-import com.pluto.aplication.service.interfaces.ErrorExceptionInterface;
+import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import com.pluto.aplication.service.interfaces.UserInterfaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -23,7 +24,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
     private UserInterfaces userService;
 
     @Autowired
-    private ErrorExceptionInterface errorExceptionService;
+    private ErrorExceptionService errorExceptionService;
 
     @Autowired
     private EmailTemplateService emailTemplateService;
@@ -31,9 +32,12 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private ImagesDataRepository imagesDataRepository;
 
+    @Autowired
+    private PriorityRepository priorityRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
-        initUserData();
+       // initUserData();
     }
 
     public void initUserData(){
@@ -41,7 +45,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
         ImagesData data =ImageMockDataBase();
 
-        User user = new User();
+        SystemUser user = new SystemUser();
         user.setId(1);
         user.setUsername("ADMIN");
         user.setPassword("ADMIN123");
@@ -53,7 +57,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         profile.setMobilePhone("809-445-7563");
         user.setProfile(profile);
         user.getProfile().setImage(data);
-        User userC = userService.createUser(user);
+        SystemUser userC = userService.createUser(user);
         System.out.println("Usuario: "+ userC );
         System.out.println("Terminando inicializando data de usuario");
 
@@ -62,6 +66,8 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         CatalogEmailTemplateInit();
 
         ImageMockItemDataBase();
+
+        CatalogPriority();
 
     }
 
@@ -139,6 +145,27 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         entity.setFileViewUri("http://localhost:8085/api/file/view/image/"+fileName );
         entity =imagesDataRepository.save(entity);
         return entity;
+    }
+
+    public void CatalogPriority(){
+
+        Priority entity = new Priority();
+
+        entity .setValue("HIGH");
+
+        priorityRepository.save(entity);
+
+        Priority entity1 = new Priority();
+
+        entity1.setValue("MEDIUM");
+
+        priorityRepository.save(entity1);
+
+        Priority entity2 = new Priority();
+
+        entity2.setValue("LOW");
+
+        priorityRepository.save(entity2);
     }
 
 }

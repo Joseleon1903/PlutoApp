@@ -28,7 +28,7 @@ public class EmailTemplateService implements EmailTemplateInterfaces{
 
 	@Override
 	public EmailTemplate save(EmailTemplate emailTemplate) {
-		return emailTemplateRepository.saveAndFlush(emailTemplate);
+		return emailTemplateRepository.save(emailTemplate);
     }
 
 }

@@ -8,8 +8,8 @@ import com.pluto.aplication.model.dto.EmailDTO;
 import com.pluto.aplication.model.dto.form.ProfileFormData;
 import com.pluto.aplication.model.entity.EmailTemplate;
 import com.pluto.aplication.model.entity.ImagesData;
-import com.pluto.aplication.model.entity.User;
-import com.pluto.aplication.service.implementation.ImageServiceImpl;
+import com.pluto.aplication.model.entity.SystemUser;
+import com.pluto.aplication.service.implementation.FileServiceImpl;
 import com.pluto.aplication.service.implementation.UserService;
 import com.pluto.aplication.service.interfaces.EmailServiceInterfaces;
 import com.pluto.aplication.service.interfaces.EmailTemplateInterfaces;
@@ -35,7 +35,7 @@ public class ProfileController {
     private EmailTemplateInterfaces emailTemplateService;
 
     @Autowired
-    private ImageServiceImpl imageServiceImpl;
+    private FileServiceImpl imageServiceImpl;
 
     @Autowired
     private ProfileFormData profileFormData;
@@ -43,7 +43,7 @@ public class ProfileController {
     @RequestMapping(value ="/profile", method = RequestMethod.GET)
     public String DisplayUserProfile(Model model, Principal principal){
         System.out.println("entering DisplayUserProfile");
-        User user = userService.findByUsername(principal.getName());
+        SystemUser user = userService.findByUsername(principal.getName());
         System.out.println("user : "+ user);
         profileFormData = ProfileMapping.convertFromEntity(user);
         model.addAttribute("profileBean",profileFormData );
@@ -53,7 +53,7 @@ public class ProfileController {
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
     public String updateUserForm(@ModelAttribute(value="user") ProfileFormData user, Model model, Principal pincipal){
         System.out.println("entering updateUserForm");
-        User usuarioUpdate =userService.findByUsername(pincipal.getName());
+        SystemUser usuarioUpdate =userService.findByUsername(pincipal.getName());
         usuarioUpdate.getProfile().setFirstName(user.getFirstName());
         usuarioUpdate.getProfile().setLastName(user.getLastName());
         usuarioUpdate.getProfile().setEmail(user.getEmail());
@@ -85,7 +85,7 @@ public class ProfileController {
             System.out.println("error update image");
          }
          if(image!=null){
-            User usuarioUpdate =userService.findByUsername(profileFormData.getUsername());
+            SystemUser usuarioUpdate =userService.findByUsername(profileFormData.getUsername());
             usuarioUpdate.getProfile().setImage(image);
             usuarioUpdate =userService.updateUser(usuarioUpdate);
             profileFormData= ProfileMapping.convertFromEntity(usuarioUpdate);

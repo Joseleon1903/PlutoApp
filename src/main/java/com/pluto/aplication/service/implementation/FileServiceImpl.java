@@ -1,25 +1,29 @@
 package com.pluto.aplication.service.implementation;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import com.pluto.aplication.config.FileStorageProperties;
 import com.pluto.aplication.exception.InternalAplicationException;
+import com.pluto.aplication.model.entity.Attachment;
 import com.pluto.aplication.model.entity.ImagesData;
+import com.pluto.aplication.repository.AttachmentRepository;
 import com.pluto.aplication.repository.ImagesDataRepository;
+import com.pluto.aplication.service.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.util.StringUtils;
+
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 
 @Service
-public class ImageServiceImpl{
+public class FileServiceImpl implements FileService {
 
     private final Path fileStorageLocation;
 
@@ -30,7 +34,11 @@ public class ImageServiceImpl{
     private ImagesDataRepository imagesDataRepository;
 
     @Autowired
-    public ImageServiceImpl(FileStorageProperties fileStorageProperties) {
+    private AttachmentRepository attachmentRepository;
+
+
+    @Autowired
+    public FileServiceImpl(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
 
@@ -41,6 +49,7 @@ public class ImageServiceImpl{
         }
     }
 
+    @Override
     public ImagesData createImage(MultipartFile file) throws IOException{
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -84,6 +93,7 @@ public class ImageServiceImpl{
         return entity;
     }
 
+    @Override
     public Resource loadFileAsResource(String fileName) {
         Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
         Resource resource = resourceLoader.getResource(filePath.toUri().toString());
@@ -94,7 +104,50 @@ public class ImageServiceImpl{
         }
     }
 
-    public ImagesData findbyId(long id){
+    @Override
+    public Attachment saveAttachment(MultipartFile file, String username) throws IOException {
+
+        Attachment attachment = new Attachment();
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        attachment.setFileName(fileName);
+        attachment.setUserName(username);
+        attachment.setUploadDate(new Date());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new InternalAplicationException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/api/file/downloadFile/")
+                    .path(fileName)
+                    .toUriString();
+            attachment.setDownloadUri(fileDownloadUri);
+
+            String fileViewUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/api/file/view/image/")
+                    .path(fileName)
+                    .toUriString();
+            attachment.setViewUri(fileViewUri);
+
+            String extension = file.getOriginalFilename().split("\\.")[1];
+            String contentType = file.getContentType();
+            attachment.setDocumentType(contentType+"-"+extension);
+
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            attachment.setFileDetail("targetlocation:"+targetLocation.getRoot().toString());
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            throw new InternalAplicationException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+        return attachmentRepository.save(attachment);
+    }
+
+    @Override
+    public ImagesData findById(long id){
         return imagesDataRepository.findById(id).get();
     }
 
