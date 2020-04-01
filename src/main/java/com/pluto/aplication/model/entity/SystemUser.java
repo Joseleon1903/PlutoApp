@@ -2,6 +2,7 @@ package com.pluto.aplication.model.entity;
 
 import lombok.Data;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -21,8 +22,13 @@ public class SystemUser implements Serializable {
     private Profile profile;
 
     @ManyToMany
-    private Set<Role> roles = new HashSet<>();
-
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public SystemUser(long id) {
         this.id = id;
