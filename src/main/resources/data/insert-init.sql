@@ -8,7 +8,6 @@ INSERT INTO error_exception VALUES(6, 506, 'Project not found: name project not 
 INSERT INTO error_exception VALUES(7, 507, 'Iteration not found: name Iteration not found in database', TRUE );
 INSERT INTO error_exception VALUES(8, 500, 'Internal server error: internal service error, contact system administrator', TRUE );
 
-
 --CATALOGO INSERT EMAIL_TEMPLATE
 INSERT INTO email_template VALUES(1, 'Email_new_registration','The welcome email one of the worlds leading aplication, is quite discreet. This type of email isn’t usually recommended, as there is very little hook to the message.	','Welcome thanks for your registration');
 INSERT INTO email_template VALUES(2, 'Update_user_profile','Hello, we thank you for updating your profile data.	','Welcome thanks for update your profile');

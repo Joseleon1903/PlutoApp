@@ -26,6 +26,10 @@ public class SecurityUserDetailsService implements UserDetailsService{
 
         SystemUser user = userRepository.findByUsername(username);
 
+        if(user == null){
+            throw  new UsernameNotFoundException("Username not found in database");
+        }
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));

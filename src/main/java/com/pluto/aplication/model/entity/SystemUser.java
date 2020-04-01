@@ -2,6 +2,7 @@ package com.pluto.aplication.model.entity;
 
 import lombok.Data;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -20,7 +21,7 @@ public class SystemUser implements Serializable {
     private Profile profile;
 
     @ManyToMany
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
 
     public SystemUser(long id) {

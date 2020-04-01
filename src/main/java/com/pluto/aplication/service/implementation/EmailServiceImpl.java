@@ -16,11 +16,11 @@ public class EmailServiceImpl implements EmailServiceInterfaces {
     @Override
     public boolean sendEmailTo(EmailDTO email) {
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email.getDestinationEmail());
-        message.setSubject(email.getHeader());
-        message.setText(email.getContent());
-        emailSender.send(message);
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo(email.getDestinationEmail());
+//        message.setSubject(email.getHeader());
+//        message.setText(email.getContent());
+//        emailSender.send(message);
         return true;
 	}
 
