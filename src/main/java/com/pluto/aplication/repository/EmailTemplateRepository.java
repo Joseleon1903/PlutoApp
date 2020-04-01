@@ -16,4 +16,7 @@ public interface EmailTemplateRepository extends CrudRepository< EmailTemplate, 
     @Query("select e from EmailTemplate e")
     List<EmailTemplate> findAll();
 
+    @Query(value = "SELECT nextval('email_template_id_seq')", nativeQuery = true)
+    Long getNextSeriesId();
+
 }

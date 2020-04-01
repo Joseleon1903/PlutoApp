@@ -2,10 +2,7 @@ package com.pluto.aplication.model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -16,7 +13,8 @@ import java.util.Date;
 public class Attachment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_seq", sequenceName = "attachment_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Long id;
 
     private String fileName;

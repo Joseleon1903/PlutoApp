@@ -28,6 +28,8 @@ public class EmailTemplateService implements EmailTemplateInterfaces{
 
 	@Override
 	public EmailTemplate save(EmailTemplate emailTemplate) {
+
+		long id = emailTemplateRepository.getNextSeriesId();
 		return emailTemplateRepository.save(emailTemplate);
     }
 

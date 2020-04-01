@@ -14,7 +14,8 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_seq", sequenceName = "project_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private long id;
 
     private String name;

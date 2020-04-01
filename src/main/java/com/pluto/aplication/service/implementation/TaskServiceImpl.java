@@ -1,6 +1,5 @@
 package com.pluto.aplication.service.implementation;
 
-import com.pluto.aplication.constant.UtilityAplication;
 import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.*;
 import com.pluto.aplication.service.interfaces.TaskService;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,6 +42,8 @@ public class TaskServiceImpl implements TaskService{
         iterationEntity.setProject(projectEntity);
         task.setPriority(priority);
         task.setIteration(iterationEntity);
+        long id = taskRepository.getNextSeriesId();
+        task.setId(id);
         return taskRepository.save(task);
     }
 
@@ -78,11 +78,8 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public Task addAttachment(long taskId, Attachment attachment) {
-
         Task entity = taskRepository.findById(taskId).get();
-
         entity.getAttachments().add(attachment);
-
         return taskRepository.save(entity);
     }
 
@@ -92,7 +89,6 @@ public class TaskServiceImpl implements TaskService{
         Comment commentEntity = commentRepository.save(comment);
         entiTask.getCommnets().add(commentEntity);
         return taskRepository.save(entiTask);
-
     }
 
     @Override

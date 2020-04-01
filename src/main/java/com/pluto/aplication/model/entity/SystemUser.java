@@ -14,7 +14,8 @@ public class SystemUser implements Serializable {
     private static final long serialVersionUID = -3571211166033652642L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_seq", sequenceName = "system_user_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private long id;
     private String username;
     private String password;
@@ -28,7 +29,7 @@ public class SystemUser implements Serializable {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Collection<Role> roles = new HashSet<>();
 
     public SystemUser(long id) {
         this.id = id;
@@ -39,6 +40,15 @@ public class SystemUser implements Serializable {
     }
 
     public SystemUser() {}
-    
 
+    @Override
+    public String toString() {
+        return "SystemUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", profile=" + profile +
+                ", roles=" + roles.size() +
+                '}';
+    }
 }

@@ -26,6 +26,8 @@ public class IterationServiceImpl implements IterationService {
     public Iteration save(Long projectId, Iteration iteration) {
         Project project = projectRepository.findById(projectId).get();
         iteration.setProject(project);
+        long id = iterationRepository.getNextSeriesId();
+        iteration.setId(id);
         return iterationRepository.save(iteration);
     }
 

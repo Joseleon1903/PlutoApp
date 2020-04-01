@@ -11,9 +11,10 @@ import javax.persistence.*;
 public class EmailTemplate implements Serializable{
 
     private static final long serialVersionUID = 2936373077564813096L;
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_seq", sequenceName = "email_template_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private long id;
     private String code;
     private String header;
