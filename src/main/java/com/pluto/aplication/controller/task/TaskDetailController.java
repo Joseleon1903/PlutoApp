@@ -1,6 +1,7 @@
 package com.pluto.aplication.controller.task;
 
 import com.pluto.aplication.constant.ConstantAplication;
+import com.pluto.aplication.constant.StatementType;
 import com.pluto.aplication.mapping.AttachmentMapping;
 import com.pluto.aplication.mapping.CommentMapping;
 import com.pluto.aplication.mapping.TaskMapping;
@@ -84,11 +85,24 @@ public class TaskDetailController {
             return "redirect:/task/"+taskViewFormData.getId()+"/detail?error="+ ConstantAplication.INVALID_INPUT_FORM;
         }
 
+
         entity.setType(taskViewFormData.getType());
         entity.setStatus(taskViewFormData.getStatus());
+
+        // validation statement
+        if(taskViewFormData.getStatement().equalsIgnoreCase(StatementType.Closed.toString())){
+            entity.setDone(true);
+            entity.setStatus(100);
+            entity.setEndDate(new Date());
+        }
+
         entity.setStatement(statementService.findByName(taskViewFormData.getStatement()));
         entity.setStartDate(taskViewFormData.getStartDate());
         entity.setEndDate(taskViewFormData.getEndDate());
+
+
+
+
         taskService.update(entity);
 
         return "redirect:/task/"+taskViewFormData.getId()+"/detail";

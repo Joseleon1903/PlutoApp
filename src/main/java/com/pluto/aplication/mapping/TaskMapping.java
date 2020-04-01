@@ -26,6 +26,7 @@ public class TaskMapping {
         entity.setType(taskFormData.getType());
         entity.setPriority(new Priority(taskFormData.getPriority()));
         entity.setIteration(new Iteration(taskFormData.getIterationName()));
+        entity.setCreationDate(new Date());
         entity.setStatus(0);
         entity.setDone(false);
         entity.setStatement(new Statement(2, "New"));
