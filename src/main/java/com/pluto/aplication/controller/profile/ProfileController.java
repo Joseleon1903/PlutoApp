@@ -3,6 +3,7 @@ package com.pluto.aplication.controller.profile;
 import java.io.IOException;
 import java.security.Principal;
 import com.pluto.aplication.constant.ConstantAplication;
+import com.pluto.aplication.controller.HomePageController;
 import com.pluto.aplication.mapping.ProfileMapping;
 import com.pluto.aplication.model.dto.EmailDTO;
 import com.pluto.aplication.model.dto.form.ProfileFormData;
@@ -13,6 +14,8 @@ import com.pluto.aplication.service.implementation.FileServiceImpl;
 import com.pluto.aplication.service.implementation.UserService;
 import com.pluto.aplication.service.interfaces.EmailServiceInterfaces;
 import com.pluto.aplication.service.interfaces.EmailTemplateInterfaces;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ProfileController {
+
+    Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @Autowired
     private UserService userService;
@@ -42,7 +47,7 @@ public class ProfileController {
 
     @RequestMapping(value ="/profile", method = RequestMethod.GET)
     public String DisplayUserProfile(Model model, Principal principal){
-        System.out.println("entering DisplayUserProfile");
+        logger.info("entering DisplayUserProfile");
         SystemUser user = userService.findByUsername(principal.getName());
         System.out.println("user : "+ user);
         profileFormData = ProfileMapping.convertFromEntity(user);
@@ -52,7 +57,7 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
     public String updateUserForm(@ModelAttribute(value="user") ProfileFormData user, Model model, Principal pincipal){
-        System.out.println("entering updateUserForm");
+        logger.info("entering updateUserForm");
         SystemUser usuarioUpdate =userService.findByUsername(pincipal.getName());
         usuarioUpdate.getProfile().setFirstName(user.getFirstName());
         usuarioUpdate.getProfile().setLastName(user.getLastName());
@@ -75,9 +80,9 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/fileUpload", method = RequestMethod.POST) 
-    public String updateProfilePicture(@RequestParam("myFile") MultipartFile myFile,Model model) { 
-         System.out.println("entering updateProfilePicture");
-         System.out.println("file name : "+ myFile.getOriginalFilename());
+    public String updateProfilePicture(@RequestParam("myFile") MultipartFile myFile,Model model) {
+         logger.info("entering updateProfilePicture");
+         logger.info("file name : "+ myFile.getOriginalFilename());
          ImagesData  image = null;
          try{
             image =imageServiceImpl.createImage(myFile);

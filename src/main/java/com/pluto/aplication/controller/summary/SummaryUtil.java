@@ -1,9 +1,12 @@
 package com.pluto.aplication.controller.summary;
 
 import com.pluto.aplication.constant.TaskType;
+import com.pluto.aplication.controller.project.ProjectDetailPageController;
 import com.pluto.aplication.model.dto.SummaryData;
 import com.pluto.aplication.model.entity.Iteration;
 import com.pluto.aplication.model.entity.Project;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
@@ -13,6 +16,8 @@ import java.util.List;
  * Created by jose eduardo on 3/24/2020.
  */
 public class SummaryUtil {
+
+    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
 
     private SummaryUtil(){}
 
@@ -97,8 +102,5 @@ public class SummaryUtil {
         model.addAttribute("enhancementPercent", enhancementPercent);
 
     }
-
-
-
 
 }

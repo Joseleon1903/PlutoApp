@@ -1,6 +1,7 @@
 package com.pluto.aplication.controller.task;
 
 import com.pluto.aplication.constant.ConstantAplication;
+import com.pluto.aplication.controller.project.ProjectDetailPageController;
 import com.pluto.aplication.mapping.ProjectMapping;
 import com.pluto.aplication.mapping.TaskMapping;
 import com.pluto.aplication.model.dto.form.ProjectFormDTO;
@@ -12,6 +13,8 @@ import com.pluto.aplication.service.interfaces.IterationService;
 import com.pluto.aplication.service.interfaces.ProjectService;
 import com.pluto.aplication.service.interfaces.TaskService;
 import com.pluto.aplication.util.ApplicationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,8 @@ import java.util.ArrayList;
  */
 @Controller
 public class TaskPageController {
+
+    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
 
     @Autowired
     private TaskService taskService;
@@ -52,9 +57,8 @@ public class TaskPageController {
     @RequestMapping("/task/create")
     public String taskPage(Model model , @RequestParam(name ="projectId", required = false) Long projectId,
                            @RequestParam(name ="error", required = false) String error){
-        System.out.println("entry point display home");
-
-        System.out.println("param : "+projectId);
+        logger.info("entry point display home");
+        logger.info("param : "+projectId);
         model.addAttribute("searchBean", searchFormDTO);
         model.addAttribute("iterationList", new ArrayList<>());
 
@@ -62,8 +66,8 @@ public class TaskPageController {
             Project project = projectService.findById(projectId);
             projectFormDTO = ProjectMapping.convertToFormDto(project);
             model.addAttribute("iterationList", iterationService.findByProjectId(projectFormDTO.getId()));
-
         }
+
         model.addAttribute("projectBean", projectFormDTO);
         model.addAttribute("taskFormBean", taskFormData);
         ApplicationUtil.validateErrorPage(error, model, exceptionService);
@@ -73,17 +77,19 @@ public class TaskPageController {
 
     @RequestMapping(value = "task/Add", method = RequestMethod.POST)
     public String registerTaskProject(@ModelAttribute(value="taskData") TaskFormData taskFormData){
-        System.out.println("entry point display registerProject");
-        System.out.println("Param: "+taskFormData);
+        logger.info("entry point display registerProject");
+        logger.info("Param: "+taskFormData);
 
         if(taskFormData.getProjectId() == null){
             return "redirect:/task/create?error="+ ConstantAplication.PROJECT_NOT_FOUND;
         }
+
         long projectId = taskFormData.getProjectId();
 
         if(!ApplicationUtil.isStringNullOrEmpty(taskFormData.getIterationName())){
             return "redirect:/task/create?error="+ ConstantAplication.ITERATION_NOT_FOUND;
         }
+
         if(!ApplicationUtil.isStringNullOrEmpty(taskFormData.getTittle()) ||
                 !ApplicationUtil.isStringNullOrEmpty(taskFormData.getTaskDetail()) ||
                 !ApplicationUtil.isStringNullOrEmpty(taskFormData.getPriority()) ||
@@ -98,8 +104,8 @@ public class TaskPageController {
 
     @RequestMapping(value = "/task/search", method = RequestMethod.POST)
     public String searchProject(@ModelAttribute(value="searchData") SearchFormDTO searchBean, Model model){
-        System.out.println("entry point display searchProject");
-        System.out.println("Search Param : "+searchBean);
+        logger.info("entry point display searchProject");
+        logger.info("Search Param : "+searchBean);
         model.addAttribute("searchBean", searchFormDTO);
         Project project = projectService.findByName(searchBean.getContent());
 

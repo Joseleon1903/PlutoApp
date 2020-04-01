@@ -9,6 +9,8 @@ import com.pluto.aplication.model.entity.Project;
 import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import com.pluto.aplication.service.interfaces.ProjectService;
 import com.pluto.aplication.util.ApplicationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class ProjectPageController {
+
+    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
 
     @Autowired
     private ErrorExceptionService exceptionService;
@@ -40,9 +44,9 @@ public class ProjectPageController {
 
     @RequestMapping("/project")
     public String projectPage(Model model, @RequestParam(name ="error", required = false) String error){
-        System.out.println("entry point display projectPage");
+        logger.info("entry point display projectPage");
 
-        System.out.println("param error "+ error);
+        logger.info("param error "+ error);
         model.addAttribute("projectBean", projectFormDTO);
         model.addAttribute("projectUpdate", projectUpdateFormDTO);
         model.addAttribute("searchBean", searchFormDTO);
@@ -55,8 +59,8 @@ public class ProjectPageController {
 
     @RequestMapping(value = "/project/registration", method = RequestMethod.POST)
     public String registerProject(@ModelAttribute(value="projectData") ProjectFormDTO projectFormDTO, Model model){
-        System.out.println("entry point display registerProject");
-        System.out.println("Param: "+projectFormDTO);
+        logger.info("entry point display registerProject");
+        logger.info("Param: "+projectFormDTO);
 
         //integrity validation
         if(!ApplicationUtil.isStringNullOrEmpty(projectFormDTO.getDescription()) ||
@@ -75,8 +79,8 @@ public class ProjectPageController {
 
     @RequestMapping(value = "/project/update", method = RequestMethod.POST)
     public String updateProject(@ModelAttribute(value="projectUpdateData") ProjectFormDTO projectFormDTO, Model model){
-        System.out.println("entry point display registerProject");
-        System.out.println("Param: "+projectFormDTO);
+        logger.info("entry point display registerProject");
+        logger.info("Param: "+projectFormDTO);
 
         //integrity validation
         if(!ApplicationUtil.isStringNullOrEmpty(projectFormDTO.getName()) ||
@@ -92,8 +96,8 @@ public class ProjectPageController {
 
     @RequestMapping(value = "/project/search", method = RequestMethod.POST)
     public String searchProject(@ModelAttribute(value="searchData") SearchFormDTO searchBean, Model model){
-        System.out.println("entry point display searchProject");
-        System.out.println("Search Param : "+searchBean);
+        logger.info("entry point display searchProject");
+        logger.info("Search Param : "+searchBean);
 
         Project project = projectService.findByName(searchBean.getContent());
 
@@ -108,7 +112,5 @@ public class ProjectPageController {
 
         return "project/ProjectPage";
     }
-
-
 
 }
