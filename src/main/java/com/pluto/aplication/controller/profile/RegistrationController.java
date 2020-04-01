@@ -71,12 +71,13 @@ public class RegistrationController {
         //enviando email registration 
         EmailTemplate template = emailTemplateService.findByCode(ConstantAplication.REGISTRATION_EMAIL_CODE);
 
-        EmailDTO email = new EmailDTO();
-        email.setHeader("Welcome "+registerData.getUsername());
-        email.setDestinationEmail(registerData.getProfile().getEmail());
-        email.setContent(template.getContent());
-
-        emailServiceImpl.sendEmailTo(email);
+        if(template !=null){
+            EmailDTO email = new EmailDTO();
+            email.setHeader("Welcome "+registerData.getUsername());
+            email.setDestinationEmail(registerData.getProfile().getEmail());
+            email.setContent(template.getContent());
+            emailServiceImpl.sendEmailTo(email);
+        }
 
         newProfile.setFirstName(registerData.getProfile().getFirstName());
         newProfile.setLastName(registerData.getProfile().getLastName());
