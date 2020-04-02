@@ -12,7 +12,6 @@ public interface ErrorExceptionRepository extends CrudRepository< ErrorException
     @Query("select e from ErrorException e where e.status = true")
     List<ErrorException> findAllActive();
 
-    @Query("select e from ErrorException e where e.code like ?1")
     ErrorException findByCode(long code);
 
 }

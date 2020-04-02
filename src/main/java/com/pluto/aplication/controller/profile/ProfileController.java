@@ -99,7 +99,7 @@ public class ProfileController {
          model.addAttribute("profileBean",profileFormData);
          model.addAttribute("username", profileFormData.getUsername());
          // Redirect to a successful upload page 
-         return "profile/UserProfile"; 
+         return "profile/UserProfile";
     }
 
 }
