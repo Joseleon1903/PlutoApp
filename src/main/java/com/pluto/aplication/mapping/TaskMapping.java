@@ -44,7 +44,9 @@ public class TaskMapping {
         dto.setPriority(entity.getPriority().getValue());
         dto.setType(entity.getType());
         dto.setStatus(entity.getStatus());
-        dto.setStatement(entity.getStatement().getValue());
+        if(entity.getStatement() != null){
+            dto.setStatement(entity.getStatement().getValue());
+        }
         dto.setStartDate(entity.getStartDate());
         dto.setEndDate(entity.getEndDate());
         if(entity.getNote() != null){
