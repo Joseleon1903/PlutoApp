@@ -1,6 +1,5 @@
 package com.pluto.aplication.controller.Iteration;
 
-import com.pluto.aplication.controller.HomePageController;
 import com.pluto.aplication.mapping.IterationMapping;
 import com.pluto.aplication.model.dto.IterationData;
 import com.pluto.aplication.model.entity.Iteration;
@@ -36,7 +35,7 @@ public class IterationDetailController {
     private TaskService taskService;
 
     @RequestMapping(value = "/iteration/{iterationId}/detail", method = RequestMethod.GET)
-    public String displayIterationDetail(@PathVariable("iterationId") Long iterationId , Model model){
+    public String displayIterationDetail(@PathVariable("iterationId") Long iterationId, Model model){
 
         logger.info("Entering in displayIterationDetail");
         logger.info("Param: "+iterationId);
@@ -46,7 +45,7 @@ public class IterationDetailController {
         iterationData = IterationMapping.convertToFormDto(iterationEntity, taskList);
         model.addAttribute("iterationBean", iterationData);
 
-        return "/iteration/IterationDetailPage";
+        return "iteration/IterationDetailPage";
     }
 
 

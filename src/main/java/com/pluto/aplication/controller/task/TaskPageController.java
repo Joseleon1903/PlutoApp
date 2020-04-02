@@ -57,7 +57,7 @@ public class TaskPageController {
     @RequestMapping("/task/create")
     public String taskPage(Model model , @RequestParam(name ="projectId", required = false) Long projectId,
                            @RequestParam(name ="error", required = false) String error){
-        logger.info("entry point display home");
+        logger.info("entry point taskPage");
         logger.info("param : "+projectId);
         model.addAttribute("searchBean", searchFormDTO);
         model.addAttribute("iterationList", new ArrayList<>());

@@ -65,7 +65,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" th:action="@{/task/list(searchData =${searchBean})}" th:object="${searchBean}" method="get">
+                                    <form role="form" th:action="@{/task/search(searchData =${searchBean})}" th:object="${searchBean}" method="post">
 
                                         <div class="col-lg-6">
 
