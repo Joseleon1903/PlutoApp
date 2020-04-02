@@ -30,6 +30,6 @@ INSERT INTO role (id, name) VALUES(2, 'USER');
 INSERT INTO role (id, name) VALUES(3, 'GUEST');
 
 --DEFAULT ADMIN PROFILE INSERT
-INSERT INTO profile VALUES(1, 'admin@admin.com', 'admin','admin', '809-555-5555', null);
-INSERT INTO system_user VALUES(1, '$2a$10$NQCjVkhQcNkDTwMdnWWmfuQofFAdCs.jr0.cij0CPqcBybj.QMAoK', 'admin', 1);
-insert INTO users_roles (role_id, user_id) VALUES(1,1);
+-- INSERT INTO profile VALUES(1, 'admin@admin.com', 'admin','admin', '809-555-5555', null);
+-- INSERT INTO system_user VALUES(1, '$2a$10$NQCjVkhQcNkDTwMdnWWmfuQofFAdCs.jr0.cij0CPqcBybj.QMAoK', 'admin', 1);
+-- insert INTO users_roles (role_id, user_id) VALUES(1,1);
