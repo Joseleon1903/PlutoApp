@@ -1,6 +1,7 @@
 package com.pluto.aplication.controller.summary;
 
 import com.pluto.aplication.constant.ConstantAplication;
+import com.pluto.aplication.controller.project.ProjectDetailPageController;
 import com.pluto.aplication.model.dto.SummaryData;
 import com.pluto.aplication.model.dto.SummaryDetailData;
 import com.pluto.aplication.model.dto.form.SummaryFormData;
@@ -10,6 +11,8 @@ import com.pluto.aplication.service.interfaces.IterationService;
 import com.pluto.aplication.service.interfaces.ProjectService;
 import com.pluto.aplication.service.interfaces.SummaryService;
 import com.pluto.aplication.util.ApplicationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,8 @@ import java.util.List;
  */
 @Controller
 public class SummaryPageController {
+
+    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
 
     @Autowired
     private ErrorExceptionService exceptionService;
@@ -54,7 +59,7 @@ public class SummaryPageController {
                                     @RequestParam(name ="showPageindex", required = false) Integer showPageindex,
                                     @RequestParam(name ="error", required = false) String error){
 
-        System.out.println("entering in method summayDisplayPage");
+        logger.info("entering in method summayDisplayPage");
 
         if(!ApplicationUtil.isStringNullOrEmpty(projectName)){
             summaryFormData.setProjectName(projectName);
@@ -85,8 +90,8 @@ public class SummaryPageController {
 
     @RequestMapping(value = "/summary/search", method = RequestMethod.POST)
     public String searchProject(@ModelAttribute(value="searchData") SummaryFormData summaryFormData, Model model){
-        System.out.println("entry point display searchProject");
-        System.out.println("Search Param : "+summaryFormData);
+        logger.info("entry point display searchProject");
+        logger.info("Search Param : "+summaryFormData);
 
         Iteration iteration = iterationService.findByName(summaryFormData.getIterationName());
 
@@ -96,9 +101,7 @@ public class SummaryPageController {
                     +"&showEntry="+25
                     +"&showPageindex="+0;
         }
-
         return "redirect:/summary?error="+ ConstantAplication.ITERATION_NOT_FOUND;
     }
-
 
 }

@@ -1,6 +1,7 @@
 package com.pluto.aplication.controller.profile;
 
 import com.pluto.aplication.constant.ConstantAplication;
+import com.pluto.aplication.controller.HomePageController;
 import com.pluto.aplication.model.dto.EmailDTO;
 import com.pluto.aplication.model.dto.GenericErrorDTO;
 import com.pluto.aplication.model.dto.RegistrationDTO;
@@ -11,6 +12,8 @@ import com.pluto.aplication.service.implementation.ErrorExceptionService;
 import com.pluto.aplication.service.implementation.UserService;
 import com.pluto.aplication.service.interfaces.EmailServiceInterfaces;
 import com.pluto.aplication.service.interfaces.EmailTemplateInterfaces;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RegistrationController {
+
+    Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
     @Autowired
     private RegistrationDTO registrationDTO;
@@ -87,7 +92,7 @@ public class RegistrationController {
         newUser.setUsername(registerData.getUsername());
         newUser.setProfile(newProfile);
         newUser =userService.createUser(newUser);
-        System.out.println("usuario registrdo: "+ newUser);
+        logger.info("usuario registrdo: "+ newUser);
         return "profile/register/RegistrationSuccess";
     }
 

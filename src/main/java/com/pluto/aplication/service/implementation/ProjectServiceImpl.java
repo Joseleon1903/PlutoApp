@@ -20,6 +20,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project save(Project project) {
+        long id = projectRepository.getNextSeriesId();
+        project.setId(id);
         return projectRepository.save(project);
     }
 

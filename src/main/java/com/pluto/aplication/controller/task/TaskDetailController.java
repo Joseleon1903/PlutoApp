@@ -2,6 +2,7 @@ package com.pluto.aplication.controller.task;
 
 import com.pluto.aplication.constant.ConstantAplication;
 import com.pluto.aplication.constant.StatementType;
+import com.pluto.aplication.controller.project.ProjectDetailPageController;
 import com.pluto.aplication.mapping.AttachmentMapping;
 import com.pluto.aplication.mapping.CommentMapping;
 import com.pluto.aplication.mapping.TaskMapping;
@@ -18,6 +19,8 @@ import com.pluto.aplication.service.interfaces.StatementService;
 import com.pluto.aplication.service.interfaces.TaskService;
 import com.pluto.aplication.util.ApplicationUtil;
 import org.h2.engine.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +36,8 @@ import java.util.Date;
  */
 @Controller
 public class TaskDetailController {
+
+    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
 
     @Autowired
     private ErrorExceptionService exceptionService;
@@ -57,11 +62,10 @@ public class TaskDetailController {
 
     @RequestMapping("/task/{taskId}/detail")
     public String taskPage(Model model , @PathVariable("taskId") Long taskId, @RequestParam(name ="error", required = false) String error){
-        System.out.println("entry point display taskPageDetail");
-        System.out.println("Param : "+taskId);
+        logger.info("entry point display taskPageDetail");
+        logger.info("Param : "+taskId);
 
         Task entity = taskService.findById(taskId);
-
         taskViewFormData = TaskMapping.convertEntityToDto(entity);
 
         model.addAttribute("taskViewFormBean",taskViewFormData );
@@ -75,8 +79,8 @@ public class TaskDetailController {
 
     @RequestMapping(value = "/task/update", method = RequestMethod.POST)
     public String updateTask(@ModelAttribute(value="taskData") TaskViewFormData taskViewFormData, Model model){
-        System.out.println("entry point display taskPageDetail updateTask");
-        System.out.println("param : "+taskViewFormData);
+        logger.info("entry point display taskPageDetail updateTask");
+        logger.info("param : "+taskViewFormData);
 
         Task entity = taskService.findById(taskViewFormData.getId());
 
@@ -84,7 +88,6 @@ public class TaskDetailController {
                 !ApplicationUtil.isStringNullOrEmpty(taskViewFormData.getStatement())){
             return "redirect:/task/"+taskViewFormData.getId()+"/detail?error="+ ConstantAplication.INVALID_INPUT_FORM;
         }
-
 
         entity.setType(taskViewFormData.getType());
         entity.setStatus(taskViewFormData.getStatus());
@@ -100,9 +103,6 @@ public class TaskDetailController {
         entity.setStartDate(taskViewFormData.getStartDate());
         entity.setEndDate(taskViewFormData.getEndDate());
 
-
-
-
         taskService.update(entity);
 
         return "redirect:/task/"+taskViewFormData.getId()+"/detail";
@@ -112,22 +112,23 @@ public class TaskDetailController {
     @RequestMapping(value = "/task/{taskid}/attachment/file/upload", method = RequestMethod.POST)
     public String addTaskAttachment(@RequestParam("file") MultipartFile myFile,@PathVariable("taskid") Long taskid,
                                     Principal principal, Model model) {
-        System.out.println("entering addTaskAttachment");
+        logger.info("entering addTaskAttachment");
 
         if(!ApplicationUtil.isStringNullOrEmpty(myFile.getOriginalFilename())){
             return "redirect:/task/"+taskid+"/detail?error="+ ConstantAplication.INVALID_INPUT_FORM;
         }
-        System.out.println("file name : "+ myFile.getOriginalFilename());
+
+        logger.info("file name : "+ myFile.getOriginalFilename());
         Attachment attachment = null;
         String userName = principal.getName();
         try{
-            System.out.println("entering save Attachment");
+            logger.info("entering save Attachment");
             attachment =  fileService.saveAttachment(myFile, userName);
         }catch(IOException ex){
-            System.out.println("error save file");
+            logger.info("error save file");
             return "redirect:/task/"+taskid+"/detail?error="+ ConstantAplication.INTERNAL_SERVER_ERROR;
         }
-        System.out.println("entering add task Attachment");
+        logger.info("entering add task Attachment");
         taskService.addAttachment(taskid, attachment);
         // Redirect to a successful upload page
         return "redirect:/task/"+taskid+"/detail";

@@ -1,6 +1,7 @@
 package com.pluto.aplication.service.implementation;
 
 import com.pluto.aplication.model.entity.SystemUser;
+import com.pluto.aplication.repository.ProfileRepository;
 import com.pluto.aplication.repository.RoleRepository;
 import com.pluto.aplication.repository.UserRepository;
 import com.pluto.aplication.service.interfaces.UserInterfaces;
@@ -20,6 +21,9 @@ public class UserService implements UserInterfaces {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private ProfileRepository profileRepository;
+
 
     @Override
     public Iterable<SystemUser> findAllUsers() {
@@ -33,6 +37,12 @@ public class UserService implements UserInterfaces {
 
     @Override
     public SystemUser createUser(SystemUser user) {
+
+        long profileId = profileRepository.getNextSeriesId();
+        long userId = userRepository.getNextSeriesId();
+        user.setId(userId);
+        user.getProfile().setId(profileId);
+        user.getRoles().add(roleRepository.findById(1L).get());
         return saveOnSystem(user);
     }
 

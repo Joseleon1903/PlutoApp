@@ -2,6 +2,7 @@ package com.pluto.aplication.controller.task;
 
 import com.pluto.aplication.constant.ConstantAplication;
 import com.pluto.aplication.constant.UtilityAplication;
+import com.pluto.aplication.controller.project.ProjectDetailPageController;
 import com.pluto.aplication.model.dto.ShowTableData;
 import com.pluto.aplication.model.dto.form.CommentFormData;
 import com.pluto.aplication.model.dto.form.SearchFormDTO;
@@ -9,6 +10,8 @@ import com.pluto.aplication.model.dto.form.TaskFormData;
 import com.pluto.aplication.model.entity.Task;
 import com.pluto.aplication.service.interfaces.TaskService;
 import com.pluto.aplication.util.ApplicationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,8 @@ import java.util.List;
 @Controller
 public class TaskListPageController {
 
+    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
+
     @Autowired
     private TaskService taskService;
 
@@ -37,13 +42,15 @@ public class TaskListPageController {
     public String taskPageList(Model model,@RequestParam(name ="showEntry", required = false) Integer showEntry,
                            @RequestParam(name ="showPageindex", required = false) Integer showPageindex,
                            @RequestParam(name ="searchText", required = false) String searchText){
-        System.out.println("entry point display taskPageList");
-        System.out.println("param "+ searchText);
+        logger.info("entry point display taskPageList");
+        logger.info("param "+ searchText);
 
+        logger.info("validation showEntry");
         if(showEntry == null){
             showEntry = ConstantAplication.DEFAULT_PAGINATION_ENTRY;
         }
 
+        logger.info("validation en showPageIndex");
         if(showPageindex == null){
             showPageindex = ConstantAplication.DEFAULT_PAGINATION_INDEX;
         }
@@ -59,8 +66,8 @@ public class TaskListPageController {
 
     @RequestMapping(value = "/task/list", method = RequestMethod.POST)
     public String searchTask(@ModelAttribute(value="searchtext") SearchFormDTO searchFormDTO){
-        System.out.println("entering in method searchTask");
-        System.out.println("Param: "+ searchFormDTO);
+        logger.info("entering in method searchTask");
+        logger.info("Param: "+ searchFormDTO);
 
         if(searchFormDTO != null && ApplicationUtil.isStringNullOrEmpty(searchFormDTO.getContent())){
             return "redirect:/task/list?searchText="+ searchFormDTO.getContent()+"&showEntry="+searchFormDTO.getShowEntry();

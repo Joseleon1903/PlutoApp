@@ -14,6 +14,9 @@ import java.util.List;
  */
 public interface TaskRepository extends PagingAndSortingRepository<Task, Long> {
 
+    @Query(value = "SELECT nextval('task_id_seq')", nativeQuery = true)
+    Long getNextSeriesId();
+
     List<Task> findByIterationName(String name);
 
     Page<Task> findByIterationName(String name , Pageable pageable);

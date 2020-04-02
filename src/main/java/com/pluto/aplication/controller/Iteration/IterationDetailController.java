@@ -1,11 +1,14 @@
 package com.pluto.aplication.controller.Iteration;
 
+import com.pluto.aplication.controller.HomePageController;
 import com.pluto.aplication.mapping.IterationMapping;
 import com.pluto.aplication.model.dto.IterationData;
 import com.pluto.aplication.model.entity.Iteration;
 import com.pluto.aplication.model.entity.Task;
 import com.pluto.aplication.service.interfaces.IterationService;
 import com.pluto.aplication.service.interfaces.TaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,8 @@ import java.util.List;
 @Controller
 public class IterationDetailController {
 
+    Logger logger = LoggerFactory.getLogger(IterationDetailController.class);
+
     @Autowired
     private IterationData iterationData;
 
@@ -33,13 +38,11 @@ public class IterationDetailController {
     @RequestMapping(value = "/iteration/{iterationId}/detail", method = RequestMethod.GET)
     public String displayIterationDetail(@PathVariable("iterationId") Long iterationId , Model model){
 
-        System.out.println("Entering in displayIterationDetail");
-        System.out.println("Param: "+iterationId);
+        logger.info("Entering in displayIterationDetail");
+        logger.info("Param: "+iterationId);
 
         Iteration iterationEntity = iterationService.findById(iterationId);
-
         List<Task> taskList = taskService.findByIterationId(iterationId);
-
         iterationData = IterationMapping.convertToFormDto(iterationEntity, taskList);
         model.addAttribute("iterationBean", iterationData);
 
