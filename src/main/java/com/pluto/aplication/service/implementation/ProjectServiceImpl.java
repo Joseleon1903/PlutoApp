@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    Logger logger = LoggerFactory.getLogger(ProjectDetailPageController.class);
+    Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
     @Autowired
     private ProjectRepository projectRepository;

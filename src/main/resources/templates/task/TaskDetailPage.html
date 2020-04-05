@@ -84,8 +84,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Is Done</label>
-                                <input type="text" th:field="${taskViewFormBean.done}" th:value="${taskViewFormBean.done}" class="form-control">
+                                <label>Done</label>
+                                <input type="text" th:value="${taskViewFormBean.done}? 'COMPLETE' : 'PENDING'" class="form-control">
                             </div>
 
                             <div class="form-group">
