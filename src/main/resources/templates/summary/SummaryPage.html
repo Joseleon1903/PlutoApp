@@ -112,6 +112,9 @@
                                     <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;">
                                         Status
                                     </th>
+                                    <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 140px;">
+                                        Done
+                                    </th>
 
                                     <th tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;">
                                         Start Date
@@ -133,6 +136,7 @@
                                     <td th:text="${summary.type}">Win 98+ / OSX.2+</td>
                                     <td th:text="${summary.priority}" class="center">1.7</td>
                                     <td th:text="${summary.status}" >A</td>
+                                    <td th:text="${summary.done}? 'COMPLETE' : 'PENDING'" >A</td>
                                     <td th:text="${#dates.format(summary.startDate,'dd/MMM/yyyy')}">2020-03-21</td>
                                     <td th:text="${#dates.format(summary.endDate,'dd/MMM/yyyy')}">2020-03-21</td>
                                     <td>

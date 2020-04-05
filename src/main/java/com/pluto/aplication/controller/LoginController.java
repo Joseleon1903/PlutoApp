@@ -5,7 +5,6 @@ import com.pluto.aplication.constant.ConstantAplication;
 import com.pluto.aplication.model.entity.ErrorException;
 import com.pluto.aplication.service.implementation.ErrorExceptionService;
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model){
         logger.info("------ Login page ---------");
-        model.addAttribute("errorBean", "");   
+        model.addAttribute("errorBean", "");
         return "login";
     }
 

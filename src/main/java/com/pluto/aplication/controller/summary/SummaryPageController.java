@@ -72,7 +72,7 @@ public class SummaryPageController {
         if(error == null && ApplicationUtil.isStringNullOrEmpty(iterationName)){
             List<SummaryData> sumaryData = summaryService.searchResumenByParam(projectName, iterationName, showPageindex, showEntry);
             model.addAttribute("summaryListData", sumaryData);
-            System.out.println("Summary list count: "+ sumaryData.size());
+            logger.info("Summary list count: "+ sumaryData.size());
             summaryDetailData.setSummaryCode(SummaryUtil.generateSummaryCode(projectName, iterationName));
             summaryDetailData.setSummaryPercent(SummaryUtil.generateSummaryPercent(sumaryData));
             summaryDetailData.setBuildNumber("0.0.1");
