@@ -4,7 +4,6 @@ import com.pluto.aplication.constant.ConstantAplication;
 import com.pluto.aplication.mapping.ProjectMapping;
 import com.pluto.aplication.model.dto.form.ProjectFormDTO;
 import com.pluto.aplication.model.dto.form.SearchFormDTO;
-import com.pluto.aplication.model.entity.ErrorException;
 import com.pluto.aplication.model.entity.Project;
 import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import com.pluto.aplication.service.interfaces.ProjectService;
