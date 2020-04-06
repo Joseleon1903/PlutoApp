@@ -18,7 +18,7 @@ public interface TaskService {
 
     List<Task> findAll();
 
-    Page<Task> findAllPaginated(int page, int entry, String searchText);
+    Page<Task> findAllPaginated(int page, int entry, String searchText,String type, String priority, Boolean done);
 
     Task update(Task task);
 

@@ -1,5 +1,5 @@
 --CATALOGO INSERT ERROR_EXCEPTION
-INSERT INTO error_exception VALUES(1, 501, 'Duplicate Username: the username already exists.', TRUE );
+INSERT INTO error_exception VALUES(1, 501, 'Login failed: Invalid username or password', TRUE);
 INSERT INTO error_exception VALUES(2, 502, 'Password does not match the confirm password.', TRUE );
 INSERT INTO error_exception VALUES(3, 503, 'Duplicate Username: the username already exists	', TRUE );
 INSERT INTO error_exception VALUES(4, 504, 'Invalid input form: there are required data not provided', TRUE );
@@ -49,8 +49,8 @@ insert into iteration(id, init_date, creation_date,description, end_date, name, 
 
 -- Task
 
-insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (1, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 1', 'Example tittle 1', 'Task', 2);
-insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (2, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 2', 'Example tittle 2', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (1,null, true, 1, 'example', 1, null, 100, 'Example 1', 'Example tittle 1', 'Task', 2);
+insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (2, null, false, 1, 'example', 1, null, 50, 'Example 2', 'Example tittle 2', 'Task', 2);
 insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (3, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 3', 'Example tittle 3', 'Enhancement', 2);
 insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (4, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 4', 'Example tittle 4', 'Enhancement', 2);
 insert into task (id, end_date, is_done, iteration_task, note, priority_id, start_date, status, task_detail, task_tittle, type, statement_id) values (5, NOW(), false, 1, 'example', 1, NOW(), 50, 'Example 5', 'Example tittle 5', 'Enhancement', 2);

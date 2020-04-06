@@ -41,3 +41,10 @@
     padding-bottom: 15px;
 
 }
+
+.complete-flag-row{
+    background-color:#A9F5A9 ;
+}
+.pending-flag-row{
+    background-color:#f9f9f9 ;
+}

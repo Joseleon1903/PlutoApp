@@ -32,8 +32,4 @@ public class TaskFormData {
 
     private String note;
 
-
-
-
-
 }

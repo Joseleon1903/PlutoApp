@@ -148,46 +148,55 @@
             </div>
             <!-- /.row -->
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Creation Iteration
-                </div>
-                <div class="panel-body">
+            <div class="row">
 
-                    <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>Creation Iteration</h5>
 
-                        <div class="col-lg-12">
-
-                            <form role="form" th:action="@{/project/iteration/create(iterationData=${iterationBeanForm},projectId=${projectBean.id})}" th:object="${iterationBeanForm}" method="post" >
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" th:field="${iterationBeanForm.name}" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control" th:field="${iterationBeanForm.description}" rows="4"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Begin Date</label>
-                                    <input type="date" th:value="${iterationBeanForm.InitDate}" th:field="${iterationBeanForm.InitDate}" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>End Date</label>
-                                    <input type="date" th:value="${iterationBeanForm.endDate}" th:field="${iterationBeanForm.endDate}" class="form-control" >
-                                </div>
-
-                                <button type="submit" class="btn btn-primary" >Save</button>
-                            </form>
+                        <div >
+                        <button class="btn btn-default" type="button" style="float: right; position: relative; bottom: 35px;" onclick="buttonPlay()">
+                            <i id="iconBtn" class="fa fa-arrow-circle-o-down"></i>
+                        </button>
                         </div>
 
                     </div>
+                    <div class="panel-body" id="IterationPanel" style="display: none;">
 
+                        <div class="row">
+
+                            <div class="col-lg-12">
+
+                                <form role="form" th:action="@{/project/iteration/create(iterationData=${iterationBeanForm},projectId=${projectBean.id})}" th:object="${iterationBeanForm}" method="post" >
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" th:field="${iterationBeanForm.name}" class="form-control" >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" th:field="${iterationBeanForm.description}" rows="4"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Begin Date</label>
+                                        <input type="date" th:value="${iterationBeanForm.InitDate}" th:field="${iterationBeanForm.InitDate}" class="form-control" >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>End Date</label>
+                                        <input type="date" th:value="${iterationBeanForm.endDate}" th:field="${iterationBeanForm.endDate}" class="form-control" >
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" >Save</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
 
             <!-- /.container-fluid -->
         </div>
@@ -208,6 +217,33 @@
     <script th:src="@{/dist/js/sb-admin-2.js}" ></script>
 
     <div th:replace="fragments/error-modal :: error-dialog">...</div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        function buttonPlay() {
+
+            var className = $('#iconBtn').attr('class');
+
+            if(className =='fa fa-arrow-circle-o-down'){
+
+                $("#IterationPanel").show();
+
+                $("#iconBtn").removeClass("fa fa-arrow-circle-o-down");
+                $("#iconBtn").addClass("fa fa-arrow-circle-o-up");
+            }
+
+            if(className =='fa fa-arrow-circle-o-up'){
+
+                $("#IterationPanel").hide();
+
+                $("#iconBtn").removeClass("fa fa-arrow-circle-o-up");
+                $("#iconBtn").addClass("fa fa-arrow-circle-o-down");
+            }
+        }
+
+        /*]]>*/
+    </script>
 
 
 </div>
