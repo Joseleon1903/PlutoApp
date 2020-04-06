@@ -34,7 +34,7 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Long> {
             "                           upper(pro.name) like upper(?1) ) and " +
             "                           upper(t.type) like COALESCE(upper(?2), '%%') and " +
             "                           upper(pri.value) like COALESCE(upper(?3), '%%') and " +
-            "                           t.is_done = COALESCE(upper(?4), false)",
+            "                           t.is_done = COALESCE(?4, false)",
 
             countQuery = "SELECT count(*) from task t join priority pri ON t.priority_id = pri.id " +
                     " left join iteration it ON t.iteration_task = it.id " +
@@ -45,7 +45,7 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Long> {
                     "                   upper(pro.name) like upper(?1) ) and " +
                     "                   upper(t.type) like COALESCE(upper(?2), '%%') and " +
                     "                   upper(pri.value) like COALESCE(upper(?3), '%%') and " +
-                    "                   t.is_done = COALESCE(upper(?4), false)",
+                    "                   t.is_done = COALESCE(?4, false)",
             nativeQuery = true)
     Page<Task> findByTaskTittle(String tittle, String type, String priority , Boolean done, Pageable pageable);
 
