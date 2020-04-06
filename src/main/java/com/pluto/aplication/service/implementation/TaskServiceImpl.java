@@ -77,12 +77,8 @@ public class TaskServiceImpl implements TaskService{
             searchText="";
         }
         String searchVal = ApplicationUtil.containQueryValue(searchText);
-        if(!ApplicationUtil.isStringNullOrEmpty(type)){
-            type = "%%";
-        }
-        if(!ApplicationUtil.isStringNullOrEmpty(priority)){
-            priority = "%%";
-        }
+        type = ApplicationUtil.containQueryValue(type);
+        priority = ApplicationUtil.containQueryValue(priority);
         if(done == null){
             done =false;
         }
