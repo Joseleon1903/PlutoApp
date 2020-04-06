@@ -1,9 +1,12 @@
 package com.pluto.aplication.service.implementation;
 
+import com.pluto.aplication.controller.project.ProjectDetailPageController;
 import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.*;
 import com.pluto.aplication.service.interfaces.TaskService;
 import com.pluto.aplication.util.ApplicationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +20,9 @@ import java.util.List;
  */
 @Service
 public class TaskServiceImpl implements TaskService{
+
+    Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
+
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -71,6 +77,20 @@ public class TaskServiceImpl implements TaskService{
             searchText="";
         }
         String searchVal = ApplicationUtil.containQueryValue(searchText);
+        if(!ApplicationUtil.isStringNullOrEmpty(type)){
+            type = "%%";
+        }
+        if(!ApplicationUtil.isStringNullOrEmpty(priority)){
+            priority = "%%";
+        }
+        if(done == null){
+            done =false;
+        }
+        logger.info("Call database Query with param ");
+        logger.info("Query searchVal: "+searchVal);
+        logger.info("Query type: "+type);
+        logger.info("Query priority: "+priority);
+        logger.info("Query done: "+done);
         return taskRepository.findByTaskTittle(searchVal, type, priority, done, pageable);
     }
 
