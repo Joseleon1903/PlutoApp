@@ -62,13 +62,17 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Page<Task> findAllPaginated(int page, int entry, String searchText) {
+    public Page<Task> findAllPaginated(int page, int entry, String searchText, String type, String priority, Boolean done) {
         Pageable pageable= PageRequest.of(page, entry);
-
-        if(!ApplicationUtil.isStringNullOrEmpty(searchText)){
+        if(searchText == null && !ApplicationUtil.isStringNullOrEmpty(type) && !ApplicationUtil.isStringNullOrEmpty(priority) &&
+               done == null){
             return taskRepository.findAll(pageable);
         }
-        return taskRepository.findByTaskTittle(searchText, pageable);
+        if(searchText == null ){
+            searchText="";
+        }
+        String searchVal = ApplicationUtil.containQueryValue(searchText);
+        return taskRepository.findByTaskTittle(searchVal, type, priority, done, pageable);
     }
 
     @Override

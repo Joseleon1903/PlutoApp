@@ -97,6 +97,20 @@ public class ApplicationUtil {
         return show;
     }
 
+    public static Boolean IsDoneConvert(String value){
+
+        if("COMPLETE".equalsIgnoreCase(value)){
+            return true;
+        }
+        if("PENDING".equalsIgnoreCase(value)){
+            return false;
+        }
+        return null;
+    }
+
+    public static String containQueryValue(String value){
+        return "%"+ value+"%";
+    }
 
 
 }

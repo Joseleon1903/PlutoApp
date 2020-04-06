@@ -58,14 +58,66 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            DataTables Advanced Tables
+                        <div class="panel-heading" style="height: 100px;">
+
+                            <form role="form" th:action="@{/task/list(searchtext=${searchBean},showEntry=${pageableBean.showEntry})}" th:object="${searchBean}" method="post">
+
+                                <label>Optional database filter </label> </br>
+
+                                <fieldset>
+
+                                <div class="form-inline" style="padding-top: 1em;" >
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select class="form-control" th:field="${searchBean.type}" style="width: 120px; margin-right: 10px;" >
+                                            <option th:value="''" th:text="All" >All</option>
+                                            <option th:value="'Bug'" th:text="Bug">Bug</option>
+                                            <option th:value="'Task'" th:text="Task">Task</option>
+                                            <option th:value="'Issue'" th:text="Issue">Issue</option>
+                                            <option th:value="'Enhancement'" th:text="Enhancement">Enhancement</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Priority</label>
+                                        <select class="form-control" th:field="${searchBean.priority}" style="width: 100px; margin-right: 10px;" >
+                                            <option th:value="''" th:text="All">All</option>
+                                            <option th:value="'HIGH'" th:text="HIGH">HIGHT</option>
+                                            <option th:value="'MEDIUM'" th:text="MEDIUM">MEDIUM</option>
+                                            <option th:value="'LOW'" th:text="LOW">LOW</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Done</label>
+                                        <select class="form-control" th:field="${searchBean.done}" style="width: 120px; margin-right: 10px;" >
+                                            <option th:value="''" th:text="All" >All</option>
+                                            <option th:value="'COMPLETE'" th:text="COMPLETE" >COMPLETE</option>
+                                            <option th:value="'PENDING'" th:text="PENDING">PENDING</option>
+                                        </select>
+                                    </div>
+
+                                    <div id="dataTables-example_filter" class="dataTables_filter" style="float: right; margin-bottom:0.5em;">
+                                        <div class="input-group custom-search-form">
+                                            <input type="text" th:field="${searchBean.content}" th:value="${searchBean.content}" class="form-control" placeholder="Search...">
+                                            <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                </fieldset>
+
+                            </form>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 
-                                <form role="form" th:action="@{/task/list(searchtext=${searchBean.content},showEntry=${pageableBean.showEntry})}" th:object="${searchBean}" method="post">
 
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -78,20 +130,7 @@
                                             </select> entries</label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                    <div id="dataTables-example_filter" class="dataTables_filter" style="float: right; margin-bottom:0.5em;">
-                                            <div class="input-group custom-search-form">
-                                                <input type="text" th:field="${searchBean.content}" th:value="${searchBean.content}" class="form-control" placeholder="Search...">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="submit">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                    </div>
                                 </div>
-                                </div>
-                                </form>
 
                                 <div class="row"><div class="col-sm-12">
                                 <table width="100%" class="table table-bordered dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
