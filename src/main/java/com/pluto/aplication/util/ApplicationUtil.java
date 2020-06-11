@@ -109,6 +109,9 @@ public class ApplicationUtil {
     }
 
     public static String containQueryValue(String value){
+        if(!ApplicationUtil.isStringNullOrEmpty(value)){
+            return "%%";
+        }
         return "%"+ value+"%";
     }
 
