@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.AuthenticationException;
 //import org.springframework.security.web.DefaultRedirectStrategy;
 //import org.springframework.security.web.RedirectStrategy;
@@ -13,6 +14,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+@Profile("security")
 @Component
 public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler{
 

@@ -1,9 +1,10 @@
 package com.pluto.aplication.service.implementation;
 
 import com.pluto.aplication.model.entity.Role;
-import com.pluto.aplication.model.entity.SystemUser;
+import com.pluto.aplication.model.entity.PlutoUser;
 import com.pluto.aplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.HashSet;
 import java.util.Set;
 
+@Profile("security")
 @Service
 public class SecurityUserDetailsService implements UserDetailsService{
 
@@ -24,7 +26,7 @@ public class SecurityUserDetailsService implements UserDetailsService{
     @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        SystemUser user = userRepository.findByUsername(username);
+        PlutoUser user = userRepository.findByUsername(username);
 
         if(user == null){
             throw  new UsernameNotFoundException("Username not found in database");

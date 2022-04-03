@@ -1,6 +1,5 @@
 package com.pluto.aplication.service.interfaces;
 
-import com.pluto.aplication.model.entity.Attachment;
 import com.pluto.aplication.model.entity.ImagesData;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,5 +17,4 @@ public interface FileService {
 
     Resource loadFileAsResource(String fileName);
 
-    Attachment saveAttachment(MultipartFile file, String userName) throws IOException;
 }

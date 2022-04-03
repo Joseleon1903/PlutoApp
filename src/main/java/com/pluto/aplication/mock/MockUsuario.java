@@ -2,7 +2,6 @@ package com.pluto.aplication.mock;
 
 import com.pluto.aplication.model.entity.*;
 import com.pluto.aplication.repository.ImagesDataRepository;
-import com.pluto.aplication.repository.PriorityRepository;
 import com.pluto.aplication.service.implementation.EmailTemplateService;
 import com.pluto.aplication.service.interfaces.ErrorExceptionService;
 import com.pluto.aplication.service.interfaces.UserInterfaces;
@@ -32,8 +31,6 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private ImagesDataRepository imagesDataRepository;
 
-    @Autowired
-    private PriorityRepository priorityRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
@@ -45,7 +42,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
         ImagesData data =ImageMockDataBase();
 
-        SystemUser user = new SystemUser();
+        PlutoUser user = new PlutoUser();
         user.setId(1);
         user.setUsername("ADMIN");
         user.setPassword("ADMIN123");
@@ -57,7 +54,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         profile.setMobilePhone("809-445-7563");
         user.setProfile(profile);
         user.getProfile().setImage(data);
-        SystemUser userC = userService.createUser(user);
+        PlutoUser userC = userService.createUser(user);
         System.out.println("Usuario: "+ userC );
         System.out.println("Terminando inicializando data de usuario");
 
@@ -66,8 +63,6 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         CatalogEmailTemplateInit();
 
         ImageMockItemDataBase();
-
-        CatalogPriority();
 
     }
 
@@ -147,25 +142,6 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         return entity;
     }
 
-    public void CatalogPriority(){
 
-        Priority entity = new Priority();
-
-        entity .setValue("HIGH");
-
-        priorityRepository.save(entity);
-
-        Priority entity1 = new Priority();
-
-        entity1.setValue("MEDIUM");
-
-        priorityRepository.save(entity1);
-
-        Priority entity2 = new Priority();
-
-        entity2.setValue("LOW");
-
-        priorityRepository.save(entity2);
-    }
 
 }

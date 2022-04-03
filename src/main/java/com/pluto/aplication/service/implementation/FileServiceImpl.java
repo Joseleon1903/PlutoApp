@@ -2,9 +2,7 @@ package com.pluto.aplication.service.implementation;
 
 import com.pluto.aplication.config.FileStorageProperties;
 import com.pluto.aplication.exception.InternalAplicationException;
-import com.pluto.aplication.model.entity.Attachment;
 import com.pluto.aplication.model.entity.ImagesData;
-import com.pluto.aplication.repository.AttachmentRepository;
 import com.pluto.aplication.repository.ImagesDataRepository;
 import com.pluto.aplication.service.interfaces.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +31,6 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private ImagesDataRepository imagesDataRepository;
 
-    @Autowired
-    private AttachmentRepository attachmentRepository;
 
 
     @Autowired
@@ -104,47 +100,47 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    @Override
-    public Attachment saveAttachment(MultipartFile file, String username) throws IOException {
-
-        Attachment attachment = new Attachment();
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
-        attachment.setFileName(fileName);
-        attachment.setUserName(username);
-        attachment.setUploadDate(new Date());
-
-        try {
-            // Check if the file's name contains invalid characters
-            if(fileName.contains("..")) {
-                throw new InternalAplicationException("Sorry! Filename contains invalid path sequence " + fileName);
-            }
-
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/file/downloadFile/")
-                    .path(fileName)
-                    .toUriString();
-            attachment.setDownloadUri(fileDownloadUri);
-
-            String fileViewUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/file/view/image/")
-                    .path(fileName)
-                    .toUriString();
-            attachment.setViewUri(fileViewUri);
-
-            String extension = file.getOriginalFilename().split("\\.")[1];
-            String contentType = file.getContentType();
-            attachment.setDocumentType(contentType+"-"+extension);
-
-            // Copy file to the target location (Replacing existing file with the same name)
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
-            attachment.setFileDetail("targetlocation:"+targetLocation.getRoot().toString());
-            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ex) {
-            throw new InternalAplicationException("Could not store file " + fileName + ". Please try again!", ex);
-        }
-        return attachmentRepository.save(attachment);
-    }
+//    @Override
+//    public Attachment saveAttachment(MultipartFile file, String username) throws IOException {
+//
+//        Attachment attachment = new Attachment();
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//
+//        attachment.setFileName(fileName);
+//        attachment.setUserName(username);
+//        attachment.setUploadDate(new Date());
+//
+//        try {
+//            // Check if the file's name contains invalid characters
+//            if(fileName.contains("..")) {
+//                throw new InternalAplicationException("Sorry! Filename contains invalid path sequence " + fileName);
+//            }
+//
+//            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                    .path("/api/file/downloadFile/")
+//                    .path(fileName)
+//                    .toUriString();
+//            attachment.setDownloadUri(fileDownloadUri);
+//
+//            String fileViewUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                    .path("/api/file/view/image/")
+//                    .path(fileName)
+//                    .toUriString();
+//            attachment.setViewUri(fileViewUri);
+//
+//            String extension = file.getOriginalFilename().split("\\.")[1];
+//            String contentType = file.getContentType();
+//            attachment.setDocumentType(contentType+"-"+extension);
+//
+//            // Copy file to the target location (Replacing existing file with the same name)
+//            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+//            attachment.setFileDetail("targetlocation:"+targetLocation.getRoot().toString());
+//            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException ex) {
+//            throw new InternalAplicationException("Could not store file " + fileName + ". Please try again!", ex);
+//        }
+//        return attachmentRepository.save(attachment);
+//    }
 
     @Override
     public ImagesData findById(long id){

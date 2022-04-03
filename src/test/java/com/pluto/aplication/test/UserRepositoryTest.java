@@ -1,10 +1,10 @@
 package com.pluto.aplication.test;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
-import com.pluto.aplication.model.entity.SystemUser;
+import com.pluto.aplication.model.entity.PlutoUser;
 import com.pluto.aplication.repository.UserRepository;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -23,22 +23,22 @@ public class UserRepositoryTest{
 
     String username = "test";
 
-    @Before
+    @Before("")
     public void setUpTestEnviroment(){
-        SystemUser alex = new SystemUser(username);
+        PlutoUser alex = new PlutoUser(username);
         entityManager.persist(alex);
         entityManager.flush();
     }
 
     @Test
     public void findByUsernameTest() {
-        SystemUser found = userRepository.findByUsername(username);
+        PlutoUser found = userRepository.findByUsername(username);
         Assert.notNull(found, "Error user not found");
     }
 
     @Test
     public void updateUserTest() {
-        SystemUser found = userRepository.findByUsername(username);
+        PlutoUser found = userRepository.findByUsername(username);
         found.setUsername("test2");
         userRepository.save(found);
         Assert.notNull(userRepository.findByUsername("test2"), "Error user not found");

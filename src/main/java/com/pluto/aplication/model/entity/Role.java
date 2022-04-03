@@ -4,7 +4,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
 @Data
@@ -19,7 +18,7 @@ public class Role implements Serializable{
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<SystemUser> users;
+    private Collection<PlutoUser> users;
 
     
 }

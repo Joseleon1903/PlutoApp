@@ -1,6 +1,6 @@
 package com.pluto.aplication.service.implementation;
 
-import com.pluto.aplication.model.entity.SystemUser;
+import com.pluto.aplication.model.entity.PlutoUser;
 import com.pluto.aplication.repository.ProfileRepository;
 import com.pluto.aplication.repository.RoleRepository;
 import com.pluto.aplication.repository.UserRepository;
@@ -15,8 +15,8 @@ public class UserService implements UserInterfaces {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -26,17 +26,17 @@ public class UserService implements UserInterfaces {
 
 
     @Override
-    public Iterable<SystemUser> findAllUsers() {
+    public Iterable<PlutoUser> findAllUsers() {
         return  userRepository.findAll();
     }
 
     @Override
-    public SystemUser findById(Long id) {
+    public PlutoUser findById(Long id) {
         return userRepository.findById(id).get();
     }
 
     @Override
-    public SystemUser createUser(SystemUser user) {
+    public PlutoUser createUser(PlutoUser user) {
 
         long profileId = profileRepository.getNextSeriesId();
         long userId = userRepository.getNextSeriesId();
@@ -47,7 +47,7 @@ public class UserService implements UserInterfaces {
     }
 
     @Override
-    public SystemUser updateUser(SystemUser user) {
+    public PlutoUser updateUser(PlutoUser user) {
        if (userRepository.existsById(user.getId())){
           return userRepository.save(user);
        }
@@ -55,13 +55,13 @@ public class UserService implements UserInterfaces {
     }
 
     @Override
-    public SystemUser findByUsername(String username) {
+    public PlutoUser findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public SystemUser saveOnSystem(SystemUser user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public PlutoUser saveOnSystem(PlutoUser user) {
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

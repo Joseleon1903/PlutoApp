@@ -13,8 +13,8 @@ public class Profile implements Serializable{
     private static final long serialVersionUID = -8703912039452538788L;
 
     @Id
-    @SequenceGenerator(name = "id_seq", sequenceName = "profile_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
+    @SequenceGenerator(name = "id_profile_id", sequenceName = "profile_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_profile_id")
     private long id;
     public String firstName;
     public String lastName;

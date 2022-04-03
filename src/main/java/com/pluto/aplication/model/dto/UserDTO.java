@@ -2,10 +2,8 @@ package com.pluto.aplication.model.dto;
 
 import lombok.Data;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@XmlRootElement
 @Data
 public class UserDTO implements Serializable {
 
